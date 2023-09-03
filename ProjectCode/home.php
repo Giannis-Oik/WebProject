@@ -16,6 +16,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
         <nav>
             <a href="logout.php">Logout</a>
             <a href="profile.php">Check your profile</a>
+            <a href="map.php">Open store map</a>
         </nav>
     </body>
     </html>
