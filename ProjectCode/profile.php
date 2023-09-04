@@ -24,6 +24,9 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
         <ul>
             <li>Username: <?php echo $_SESSION['user_name']; ?> </li>
             <li>Email: <?php echo $_SESSION['email']; ?></li>
+            <li>Tokens: <?php echo $row['tokens']; ?></li>
+            <li>All time score: <?php echo $row['score']; ?></li>
+            <li>Monthly score: <?php echo $row['monthly_score']; ?></li>
         </ul>
         <nav>
             <a href="change-username.php">Change username</a>
