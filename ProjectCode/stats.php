@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "db_conn.php";
 
 if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
 {
@@ -8,15 +9,14 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
     <!DOCTYPE html>
     <html>
     <head>
-        <title>HOME</title>
+        <title>Stats</title>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <h1>Hello, Admin <?php echo $_SESSION['user_name']; ?> </h1>
-        
         <nav>
-            <a href="stats.php">Stats</a>
-            <a href="logout.php">Logout</a>
+            <a href="day_stats.php">Daily sales number stats</a>
+            <a href="mean_sale_price.php">Sale prices stats</a>
+            <a href="admin_home.php">Home</a>
         </nav>
     </body>
     </html>

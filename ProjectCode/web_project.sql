@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Εξυπηρετητής: 127.0.0.1
--- Χρόνος δημιουργίας: 05 Σεπ 2023 στις 00:18:24
+-- Χρόνος δημιουργίας: 05 Σεπ 2023 στις 23:32:32
 -- Έκδοση διακομιστή: 10.4.28-MariaDB
 -- Έκδοση PHP: 8.2.4
 
@@ -71,6 +71,31 @@ CREATE TABLE `products` (
 -- --------------------------------------------------------
 
 --
+-- Δομή πίνακα για τον πίνακα `sales`
+--
+
+CREATE TABLE `sales` (
+  `id` int(11) NOT NULL,
+  `price` double NOT NULL,
+  `date` date NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `shop_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `sales`
+--
+
+INSERT INTO `sales` (`id`, `price`, `date`, `active`, `user_id`, `product_id`, `shop_id`) VALUES
+(1, 4.99, '2023-09-05', 1, 1, 1, 1),
+(2, 3.99, '2023-09-03', 1, 1, 1, 1),
+(3, 1.99, '2023-09-05', 1, 1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Δομή πίνακα για τον πίνακα `subcategories`
 --
 
@@ -127,6 +152,12 @@ ALTER TABLE `products`
   ADD KEY `category` (`category_id`);
 
 --
+-- Ευρετήρια για πίνακα `sales`
+--
+ALTER TABLE `sales`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Ευρετήρια για πίνακα `subcategories`
 --
 ALTER TABLE `subcategories`
@@ -160,6 +191,12 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT για πίνακα `sales`
+--
+ALTER TABLE `sales`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT για πίνακα `subcategories`

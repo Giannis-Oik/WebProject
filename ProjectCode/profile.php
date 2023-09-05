@@ -4,11 +4,15 @@ include "db_conn.php";
 
 if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
 {
+    $id = $_SESSION['id'];
     $uname = $_SESSION['user_name'];
     $email = $_SESSION['email'];
     $sqlemail = "SELECT * FROM users WHERE user_name='$uname' AND email='$email'";
     $result = mysqli_query($conn,$sqlemail);
     $row = mysqli_fetch_assoc($result);
+    $sqlsales = "SELECT * FROM sales WHERE user_id='$id'";
+    $sales_result = mysqli_query($conn,$sqlsales);
+    $sales_row = mysqli_fetch_assoc($sales_result);
     ?>
 
     <!DOCTYPE html>
@@ -27,6 +31,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             <li>Tokens: <?php echo $row['tokens']; ?></li>
             <li>All time score: <?php echo $row['score']; ?></li>
             <li>Monthly score: <?php echo $row['monthly_score']; ?></li>
+            <li>Submitted sales history: <?php echo $sales_row['date']?></li>
         </ul>
         <nav>
             <a href="change-username.php">Change username</a>
