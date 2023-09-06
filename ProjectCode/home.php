@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "tokens.php";
 
 if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
 {

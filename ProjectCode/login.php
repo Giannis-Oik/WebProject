@@ -28,17 +28,6 @@ if(isset($_POST['uname']) && isset($_POST['password']))
         exit();
     }
 
-    // Password validation
-    function validatePassword($password) {
-        $pattern = '/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&\*\(\)_\+\-=])[A-Za-z\d!@#\$%\^&\*\(\)_\+\-=]{8,}$/';
-        return preg_match($pattern, $password);
-    }
-
-    if (!validatePassword($pass)) {
-        header("Location: index.php?error=The password must contain at least 8 characters, one capital letter, one number, and one symbol");
-        exit();
-    }
-
     $sql = "SELECT * FROM users WHERE user_name='$uname' AND password='$pass'";
     $sqladmin = "SELECT * FROM admins WHERE user_name='$uname' AND password='$pass'";
 
@@ -59,7 +48,7 @@ if(isset($_POST['uname']) && isset($_POST['password']))
         }
         else
         {
-            header("Location: index.php?error=Incorrect User Name or Password");
+            header("Location: index.php?error=Incorrect User Name or Password. Please try again or sign up");
             exit();
         }
     }
@@ -77,9 +66,14 @@ if(isset($_POST['uname']) && isset($_POST['password']))
         }
         else
         {
-            header("Location: index.php?error=Incorrect User Name or Password");
+            header("Location: index.php?error=Incorrect User Name or Password. Please try again or sign up");
             exit();
         }
+    }
+    else
+    {
+        header("Location: index.php?error=Incorrect User Name or Password. Please try again or sign up");
+        exit();
     }
     
 }
@@ -93,38 +87,24 @@ else
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script>
-        function validatePassword(passwordField, errorField) {
-            var password = passwordField.value;
-            var isValid = <?php echo validatePassword('/^[A-Za-z\d!@#\$%\^&\*\(\)_\+\-=]{8,}$/'); ?>;
-
-            if (!isValid) {
-                errorField.innerHTML = "The password must contain at least 8 characters, one capital letter, one number, and one symbol.";
-                return false;
-            }
-
-            errorField.innerHTML = "";
-            return true;
-        }
-    </script>
 </head>
 <body>
     <div class="container">
-        <form action="login.php" method="post" onsubmit="return validatePassword(document.getElementById('login_password'), document.getElementById('login_passwordError'));">
-            <h2>Login</h2>
-            <label> User Name </label>
+        <form action="signup.php" method="post">
+            <h2>Sign Up</h2>
+            <label>User Name</label>
             <input type="text" name="uname" placeholder="User Name" required>
-            <label> Password </label>
-            <input type="password" name="password" id="login_password" placeholder="Password" required>
-            <p id="login_passwordError" style="color: red;"></p>
-            <button type="submit">Login</button>
-        </form>
-
-        <form action="signup_page.php">
-            <button type="submit">Sign Up</button>
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Email" required>
+            <label>Password</label>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <p id="passwordError" style="color: red;"></p>
+            <button class="login-button" type="submit">Sign Up</button>
+            <button class="login-button" type="button" onclick="location.href='index.php'">Return Back</button>
         </form>
     </div>
+    <script src="password-validation.js"></script>
 </body>
 </html>

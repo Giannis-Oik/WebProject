@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Εξυπηρετητής: 127.0.0.1
--- Χρόνος δημιουργίας: 05 Σεπ 2023 στις 23:32:32
+-- Χρόνος δημιουργίας: 06 Σεπ 2023 στις 20:18:27
 -- Έκδοση διακομιστή: 10.4.28-MariaDB
 -- Έκδοση PHP: 8.2.4
 
@@ -44,6 +44,24 @@ CREATE TABLE `admins` (
 INSERT INTO `admins` (`id`, `user_name`, `password`, `email`, `tokens`, `score`, `monthly_score`) VALUES
 (1, 'Giannis', 'Giannis1!', 'giannis@gmail.com', 0, 0, 0),
 (2, 'Nikos', 'Nikos1!', 'nikos@gmail.com', 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `awards`
+--
+
+CREATE TABLE `awards` (
+  `awards_id` tinyint(4) NOT NULL DEFAULT 1,
+  `tokens` int(11) DEFAULT 0
+) ;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `awards`
+--
+
+INSERT INTO `awards` (`awards_id`, `tokens`) VALUES
+(1, 300);
 
 -- --------------------------------------------------------
 
@@ -117,6 +135,7 @@ CREATE TABLE `users` (
   `password` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `tokens` int(11) NOT NULL,
+  `monthly_tokens` int(11) NOT NULL,
   `score` int(11) NOT NULL,
   `monthly_score` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -125,8 +144,10 @@ CREATE TABLE `users` (
 -- Άδειασμα δεδομένων του πίνακα `users`
 --
 
-INSERT INTO `users` (`id`, `user_name`, `password`, `email`, `tokens`, `score`, `monthly_score`) VALUES
-(1, 'User1', 'User12345!', 'user@gmail.com', 0, 0, 0);
+INSERT INTO `users` (`id`, `user_name`, `password`, `email`, `tokens`, `monthly_tokens`, `score`, `monthly_score`) VALUES
+(1, 'User1', 'User12345!', 'user@gmail.com', 5000, 100, 2000, 30),
+(2, 'User2', 'User12345!', 'user2@gmail.com', 4000, 76, 1500, 25),
+(3, 'user3', 'User123456!', 'user3@gmail.com', 3000, 64, 1200, 20);
 
 --
 -- Ευρετήρια για άχρηστους πίνακες
@@ -137,6 +158,12 @@ INSERT INTO `users` (`id`, `user_name`, `password`, `email`, `tokens`, `score`, 
 --
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Ευρετήρια για πίνακα `awards`
+--
+ALTER TABLE `awards`
+  ADD PRIMARY KEY (`awards_id`);
 
 --
 -- Ευρετήρια για πίνακα `categories`
@@ -208,7 +235,7 @@ ALTER TABLE `subcategories`
 -- AUTO_INCREMENT για πίνακα `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Περιορισμοί για άχρηστους πίνακες
