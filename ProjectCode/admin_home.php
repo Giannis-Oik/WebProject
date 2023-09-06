@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "tokens.php";
 
 if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
 {
@@ -17,6 +18,8 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
         <nav>
             <a href="stats.php">Stats</a>
             <a href="logout.php">Logout</a>
+            <a href="leaderboard.php">Leaderboard</a>
+
         </nav>
     </body>
     </html>
