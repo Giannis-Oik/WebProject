@@ -16,19 +16,19 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
 
         $newname = validate($_POST['newusername']);
 
-        if(empty($newname))
+        if(empty($newname)) //Elegxos an exei dwthei to neo username
         {
             header("Location: change-username.php?error=A new username is required.");
             exit();
         }
         else
         {
-            $id = $_SESSION['id'];
+            $id = $_SESSION['id']; //An exei dwthei tote arxikopoihse metavlhtes me ta yparxwn id, username kai epelexe toys xrhstes apo th vash me ayto to id kai username
             $uname = $_SESSION['user_name'];
             $sql = "SELECT user_name FROM users WHERE id='$id' AND user_name='$uname'";
             $result = mysqli_query($conn,$sql);
             
-            if(mysqli_num_rows($result) === 1)
+            if(mysqli_num_rows($result) === 1) //An vrethei o xrhsths tote ananewse to username sto neo kai emfanise mhnyma epityxias
             {
                 $sqlchange = "UPDATE users SET user_name='$newname' WHERE id='$id'";
                 mysqli_query($conn,$sqlchange);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Εξυπηρετητής: 127.0.0.1
--- Χρόνος δημιουργίας: 06 Σεπ 2023 στις 20:18:27
+-- Χρόνος δημιουργίας: 07 Σεπ 2023 στις 16:16:18
 -- Έκδοση διακομιστή: 10.4.28-MariaDB
 -- Έκδοση PHP: 8.2.4
 
@@ -53,15 +53,17 @@ INSERT INTO `admins` (`id`, `user_name`, `password`, `email`, `tokens`, `score`,
 
 CREATE TABLE `awards` (
   `awards_id` tinyint(4) NOT NULL DEFAULT 1,
-  `tokens` int(11) DEFAULT 0
+  `tokens` int(11) DEFAULT 0,
+  `made` tinyint(1) NOT NULL DEFAULT 0,
+  `given` tinyint(1) NOT NULL DEFAULT 0
 ) ;
 
 --
 -- Άδειασμα δεδομένων του πίνακα `awards`
 --
 
-INSERT INTO `awards` (`awards_id`, `tokens`) VALUES
-(1, 300);
+INSERT INTO `awards` (`awards_id`, `tokens`, `made`, `given`) VALUES
+(1, 300, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -145,9 +147,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_name`, `password`, `email`, `tokens`, `monthly_tokens`, `score`, `monthly_score`) VALUES
-(1, 'User1', 'User12345!', 'user@gmail.com', 5000, 100, 2000, 30),
-(2, 'User2', 'User12345!', 'user2@gmail.com', 4000, 76, 1500, 25),
-(3, 'user3', 'User123456!', 'user3@gmail.com', 3000, 64, 1200, 20);
+(1, 'User1', 'User12345!', 'user@gmail.com', 5000, 0, 2000, 0),
+(2, 'User2', 'User12345!', 'user2@gmail.com', 4000, 0, 1500, 0),
+(3, 'user3', 'User123456!', 'user3@gmail.com', 3000, 0, 1200, 0);
 
 --
 -- Ευρετήρια για άχρηστους πίνακες

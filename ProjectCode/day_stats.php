@@ -2,7 +2,7 @@
 session_start();
 include "db_conn.php";
 
-if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
+if(isset($_SESSION['id']) && isset($_SESSION['user_name'])) //Selida poy emfanizei grafhma gia ths prosfores ana hmera enos mhna sygkekrimenoy etoys
 {
     ?>
 
@@ -19,7 +19,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
         </style>
     </head>
     <body>
-        <form method="post">
+        <form method="post"> <!-- Forma h opoia emfanizei dropdown menus gia xronies kai mhnes mesw ths opoias epilegei o admin poioy mhna ta statistika na emfanisei -->
             <div>
                 <label for="year">Year:</label>
                 <select name="year" id="year">
@@ -57,26 +57,26 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         
         <?php 
-            $day = array();
+            $day = array(); //arxikopoihsh metavlhtwn gia kathe hmera se ena array kai xronoy kai mhna vasei ths prohgoymenhs formas
             $year = filter_input(INPUT_POST, 'year', FILTER_SANITIZE_STRING);
             $month = filter_input(INPUT_POST, 'month', FILTER_SANITIZE_STRING);
             echo "<script> var month = '$month';</script>";
             echo "<script> var year = '$year';</script>";
 
-            if($year AND $month)
+            if($year AND $month) //Elegxos an exoyn dwthei kai xronos kai mhnas sth forma alliws epistrefei mhnyma lathoys
             {
-                if($month == 4 OR $month == 6 OR $month == 9 OR $month == 11)
+                if($month == 4 OR $month == 6 OR $month == 9 OR $month == 11) //Mhnes me 30 hmeres
                 {
-                    for($i = 1; $i <= 30; $i++)
+                    for($i = 1; $i <= 30; $i++) //Metrhma prosforwn gia kathe mera kai apothkeysh sthn antoistixh thesh toy pinaka day me day[0] na einai h prwth hmera toy mhna
                     {
-                        $sql = "SELECT COUNT(*) as total FROM sales WHERE YEAR(date)='$year' AND MONTH(date)='$month' AND DAY(date)='$i'";
+                        $sql = "SELECT COUNT(*) as total FROM sales WHERE YEAR(date)='$year' AND MONTH(date)='$month' AND DAY(date)='$i'"; 
                         $results = mysqli_query($conn,$sql);
                         $row = mysqli_fetch_assoc($results);
                         
                         $day[$i-1] = $row['total'];
                     }
                     ?>
-                    <script>
+                    <script> //Script poy emfanizei mesw toy chart.js API to grafhma gia ton ekastote mhna me ths prosfores ana mera
                     function getMonthName(monthNumber) {
                         const date = new Date();
                         date.setMonth(monthNumber - 1);
@@ -109,9 +109,9 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                     });
                     </script> 
                     <?php
-                }else if($month == 1 OR $month == 3 OR $month == 5 OR $month == 7 OR $month == 8 OR $month == 10 OR $month == 12)
+                }else if($month == 1 OR $month == 3 OR $month == 5 OR $month == 7 OR $month == 8 OR $month == 10 OR $month == 12) //Mhnes me 31 hmeres
                 {
-                    for($i = 1; $i <= 31; $i++)
+                    for($i = 1; $i <= 31; $i++) //Metrhma prosforwn gia kathe mera kai apothkeysh sthn antoistixh thesh toy pinaka day me day[0] na einai h prwth hmera toy mhna
                     {
                         $sql = "SELECT COUNT(*) as total FROM sales WHERE YEAR(date)='$year' AND MONTH(date)='$month' AND DAY(date)='$i'";
                         $results = mysqli_query($conn,$sql);
@@ -120,7 +120,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                         $day[$i-1] = $row['total'];
                     }
                     ?>
-                    <script>
+                    <script> //Script poy emfanizei mesw toy chart.js API to grafhma gia ton ekastote mhna me ths prosfores ana mera
                     function getMonthName(monthNumber) {
                         const date = new Date();
                         date.setMonth(monthNumber - 1);
@@ -153,9 +153,9 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                     });
                     </script> 
                     <?php
-                }else if($month == 2)
+                }else if($month == 2) //Fevrouarios me 28 hmeres
                 {
-                    for($i = 1; $i <= 28; $i++)
+                    for($i = 1; $i <= 28; $i++) //Metrhma prosforwn gia kathe mera kai apothkeysh sthn antoistixh thesh toy pinaka day me day[0] na einai h prwth hmera toy mhna
                     {
                         $sql = "SELECT COUNT(*) as total FROM sales WHERE YEAR(date)='$year' AND MONTH(date)='$month' AND DAY(date)='$i'";
                         $results = mysqli_query($conn,$sql);
@@ -164,7 +164,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                         $day[$i-1] = $row['total'];
                     }
                     ?>
-                    <script>
+                    <script> //Script poy emfanizei mesw toy chart.js API to grafhma gia ton ekastote mhna me ths prosfores ana mera
                     function getMonthName(monthNumber) {
                         const date = new Date();
                         date.setMonth(monthNumber - 1);

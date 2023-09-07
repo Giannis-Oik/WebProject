@@ -1,4 +1,4 @@
-<?php
+<?php //Arxeio gia syndesh sth vash dedomenwn
   
    $sname = "localhost";
    $uname = "root";

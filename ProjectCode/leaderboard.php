@@ -1,10 +1,10 @@
-<?php
+<?php //Selida poy emfanizei ton pinaka katataxhs xrhstwn
 session_start();
 include "db_conn.php";
 $sql = "SELECT user_name, score, tokens, monthly_tokens  FROM users GROUP BY id ORDER BY score DESC";
 $result = mysqli_query($conn,$sql);
             
-if(mysqli_num_rows($result) > 0)
+if(mysqli_num_rows($result) > 0) //Antlhse ta dedomena xrhstwn apo thn vash analoga me to synoliko score kathe enos kai apothkeyse ta se ena array
 {
     while($row = mysqli_fetch_array($result))
     {
@@ -77,24 +77,24 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
         <div class="list" id="list"></div>
         <div class="pagenumbers" id="pagination"></div>
     <script>
-        const users = <?php echo json_encode($users_array); ?>;
-        const list_element = document.getElementById("list");
+        const users = <?php echo json_encode($users_array); ?>; //Metetrepse to array me ta stoixeia xrhstwn se json wste na perastei sthn js
+        const list_element = document.getElementById("list"); //Wrapper gia to leaderboard kai th selidopoihsh
         const page_element = document.getElementById("pagination");
 
-        let current_page = 1;
+        let current_page = 1; //Arxikopoihsh metavlhtwn gia arxikh selida, users ana selida(rows) kai synolikes selides poy tha xreiastoyn
         let rows = 10;
         let page_count = Math.ceil(users.length/rows);
 
-        function DisplayBoard(items, wrapper, rows_ppg, page)
+        function DisplayBoard(items, wrapper, rows_ppg, page) //Sinartisi poy emfanizei ta stoixeia twn users
         {
             wrapper.innerHTML = "";
             page--;
 
-            let start = rows_ppg*page;
+            let start = rows_ppg*page; //Metavlhtes poy dhlwnoyn to prwto kai teleytaio stoixeio ths selidas gia na ginei to slice sto pinaka me ta synolika stoixeia
             let end = rows_ppg + start;
             let page_items = items.slice(start, end);
 
-            for(let i = 0; i < page_items.length; i++)
+            for(let i = 0; i < page_items.length; i++) //Dhmiourgia elements gia kathe stoixeio kai eisagwgi toys ston wrapper 
             {
                 let item = page_items[i];
 
@@ -106,14 +106,14 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             }
         }
 
-        function PageButton(page, items)
+        function PageButton(page, items) //Sinartisi poy dhmioyrgei ta koympia selidopoihshs 
         {
-            let button = document.createElement('button');
+            let button = document.createElement('button'); //Arxikopoihsh toy kathe koympioy 
             button.innerText = page;
 
-            if(current_page == page) {button.classList.add('active');}
+            if(current_page == page) {button.classList.add('active');} //An h twrinh selida einai toy koympioy aytoy kanto active
 
-            button.addEventListener('click', function(){
+            button.addEventListener('click', function(){ //Kathe fora poy patietai ena koympi na allazei to active koympi kai na emfanizetai h nea selida 
                 current_page = page;
                 DisplayBoard(items, list_element, rows, current_page);
 
@@ -126,7 +126,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             return button;
         }
 
-        function DisplayPages(items, wrapper, page)
+        function DisplayPages(items, wrapper, page) //Sinartisi poy arxikopoiei to wrapper gia th selidopoihsh me ta koympia
         {
             wrapper.innerHTML = "";
 

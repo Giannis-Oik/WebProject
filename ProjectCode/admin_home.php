@@ -1,4 +1,4 @@
-<?php
+<?php //Arxikh selida twn admins me to menu poy afora tis energeies twn admins
 session_start();
 include "tokens.php";
 

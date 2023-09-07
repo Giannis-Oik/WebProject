@@ -1,4 +1,4 @@
-<?php
+<?php //Arxeio poy emfanizei ta aparaithta gia thn allagh password
 session_start();
 include "db_conn.php";
 

@@ -4,17 +4,15 @@
     <title> LOGIN </title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <style>
-        /* Additional style for the "Sign Up" button */
         .signup-button {
-            background-color: #f0f0f0; /* Pale background color */
+            background-color: #f0f0f0; 
             border: none;
-            color: #333; /* Darker text color */
+            color: #333;
             padding: 10px 15px;
             cursor: pointer;
-            margin-left: 10px; /* Add some margin between the buttons */
+            margin-left: 10px; 
         }
 
-        /* Apply the same button style for consistency */
         .button {
             background-color: #333;
             border: none;
@@ -25,7 +23,7 @@
     </style>
 </head>
 <body>
-    <form action="login.php" method="post">
+    <form action="login.php" method="post"> <!-- Arxeio ypodeixhs gia to poia selida emfanizetai otan fortwthei to site -->
         <h2>LOGIN</h2>
         <?php if(isset($_GET['error'])) { ?>
             <p class="error"> <?php echo $_GET['error']; ?></p>
