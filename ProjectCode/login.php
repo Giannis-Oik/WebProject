@@ -2,11 +2,11 @@
 session_start();
 include "db_conn.php";
 
-$login_error = ''; // Initialize the login error message
+$login_error = ''; //Arxikopoihsh mhnymatos gia login error
 
 if(isset($_POST['uname']) && isset($_POST['password']))
 {
-    function validate($data)
+    function validate($data) //Synarthsh poy katharizei ta dwsmena dedomena
     {
         $data = trim($data);
         $data = stripslashes($data);
@@ -17,27 +17,27 @@ if(isset($_POST['uname']) && isset($_POST['password']))
     $uname = validate($_POST['uname']);
     $pass = validate($_POST['password']);
 
-    if(empty($uname))
+    if(empty($uname)) //An den yparxei username tote emfanise error
     {
         header("Location: index.php?error=User Name is required");
         exit();
     }
-    else if(empty($pass))
+    else if(empty($pass)) //An den yparxei password submitted tote emfanise error
     {
         header("Location: index.php?error=Password is required");
         exit();
     }
 
-    $sql = "SELECT * FROM users WHERE user_name='$uname' AND password='$pass'";
+    $sql = "SELECT * FROM users WHERE user_name='$uname' AND password='$pass'"; //Retrieve apo th vash ta dedomena xrhstwn kai admin
     $sqladmin = "SELECT * FROM admins WHERE user_name='$uname' AND password='$pass'";
 
     $result = mysqli_query($conn, $sql);
     $resultadmin = mysqli_query($conn, $sqladmin);
 
-    if(mysqli_num_rows($result) === 1)
+    if(mysqli_num_rows($result) === 1) //Perna ta dedomena xrhstwn kai psaxe gia xrhsth me ta dwsmena username, password
     {
         $row = mysqli_fetch_assoc($result);
-        if($row['user_name'] === $uname && $row['password'] === $pass)
+        if($row['user_name'] === $uname && $row['password'] === $pass) //Vrethike xrhsths: emfanise mhnyma eisodoy, arxikopoihse to session kai fortwse to home page
         {
             echo "You are now logged in.";
             $_SESSION['user_name'] = $row['user_name'];
@@ -52,10 +52,10 @@ if(isset($_POST['uname']) && isset($_POST['password']))
             exit();
         }
     }
-    else if(mysqli_num_rows($resultadmin) === 1)
+    else if(mysqli_num_rows($resultadmin) === 1) //Perna ta dedomena admin kai psaxe gia admin me ta dwsmena username, password
     {
         $row = mysqli_fetch_assoc($resultadmin);
-        if($row['user_name'] === $uname && $row['password'] === $pass)
+        if($row['user_name'] === $uname && $row['password'] === $pass) //Vrethike admin: emfanise mhnyma eisodoy, arxikopoihse to session kai fortwse to home page
         {
             echo "You are now logged in.";
             $_SESSION['user_name'] = $row['user_name'];
@@ -84,7 +84,7 @@ else
 }
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- Forma gia to signup poy yparxei mazi me to login -->
 <html>
 <head>
     <title>Sign Up</title>

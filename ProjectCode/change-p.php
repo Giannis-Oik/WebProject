@@ -24,7 +24,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
         $newpass = validate($_POST['newpassword']);
         $conpass = validate($_POST['conpassword']);
 
-        if(empty($oldpass))
+        if(empty($oldpass)) //Elegxos an exoyn dwthei palio, neo password kai an to neo me to epivevaiwshs einai idia
         {
             header("Location: change-password.php?error=Old password is required.");
             exit();
@@ -38,18 +38,18 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             exit();
         }else
         {
-            $id = $_SESSION['id'];
+            $id = $_SESSION['id']; //An exoyn dwthei swsto ta tria password epelexe twn xrhsth apo th vash me ayto to id kai password 
             $sql = "SELECT password FROM users WHERE id='$id' AND password='$oldpass'";
             $result = mysqli_query($conn,$sql);
 
-            if (!validatePassword($newpass)) 
+            if (!validatePassword($newpass)) //An o neos kwdikos den threi ths proypotheseis emfanise mhnyma lathoys
             {
                 header("Location: change-password.php?error=New password must contain at least 8 characters, one capital letter, one number, and one symbol");
                 exit();
             } 
             else 
             {
-                if(mysqli_num_rows($result) === 1)
+                if(mysqli_num_rows($result) === 1) //An vrethei o xrhsths me to id kai password enhmerwse ton kwdiko toy ston neo kai emfanise mhnyma epityxias
                 {
                     $sqlchange = "UPDATE users SET password='$newpass' WHERE id='$id'";
                     mysqli_query($conn,$sqlchange);

@@ -2,7 +2,7 @@
 session_start();
 include "tokens.php";
 
-if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
+if(isset($_SESSION['id']) && isset($_SESSION['user_name'])) //Arxikh selida xrhstwn, perilamvanei to menu gia perigihsh stis ypoloipes selides
 {
     ?>
 

@@ -2,7 +2,7 @@
 session_start();
 include "db_conn.php";
 
-if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
+if(isset($_SESSION['id']) && isset($_SESSION['user_name'])) //Selida poy emfanizei to menu ston admin sxetika me poia statistika thelei na dei h epsitrofh sthn arxikh
 {
     ?>
 
