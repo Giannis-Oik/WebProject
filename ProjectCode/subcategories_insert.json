@@ -1,0 +1,43 @@
+[
+ {
+     "uuid": "4f1993ca5bd244329abf1d59746315b8",
+     "name": "Χυμοί",
+     "id": "a8ac6be68b53443bbd93b229e2f9cd34"
+ },
+ {
+    "uuid": "3010aca5cbdc401e8dfe1d39320a8d1a",
+    "name": "Αναψυκτικά - Ενεργειακά Ποτά",
+    "id": "a8ac6be68b53443bbd93b229e2f9cd34" 
+ },
+ {
+     "uuid": "2bce84e7df694ab1b81486aa2baf555d",
+     "name": "Σερβιέτες",
+     "id": "8e8117f7d9d64cf1a931a351eb15bd69"
+ },
+ {
+     "uuid": "26e416b6efa745218f810c34678734b2",
+     "name": "Στοματική υγιεινή",
+     "id": "8e8117f7d9d64cf1a931a351eb15bd69"
+ },
+ {    
+    "uuid": "9bc82778d6b44152b303698e8f72c429",
+    "name": "Φρέσκα/Λαχανικά",
+    "id": "ee0022e7b1b34eb2b834ea334cda52e7" 
+ },
+ {
+    "uuid": "ea47cc6b2f6743169188da125e1f3761",
+    "name": "Φρέσκα/Φρούτα",
+    "id": "ee0022e7b1b34eb2b834ea334cda52e7"  
+ },
+ {
+    "uuid": "926262c303fe402a8542a5d5cf3ac7eb",
+    "name": "Pet shop/Τροφή γάτας",
+    "id": "662418cbd02e435280148dbb8892782a" 
+ },
+ {
+    "uuid": "0c6e42d52765495dbbd06c189a4fc80f",
+    "name": "Pet shop/Τροφή σκύλου",
+    "id": "662418cbd02e435280148dbb8892782a"  
+ }
+
+]
