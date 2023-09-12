@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'db_conn.php';
 
 if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
 {
@@ -12,18 +13,11 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             $file_tmp = $_FILES['file_to_upload']['tmp_name'];
             
             // Specify the directory where you want to store uploaded files
-            $upload_directory = "./"; // Use "./" to represent the current directory
+            $upload_directory = ""; // Use "./" to represent the current directory
             
             // Move the uploaded file to the desired directory
             if(move_uploaded_file($file_tmp, $upload_directory . $file_name))
             {
-                // Database connection
-                $sname = "localhost";
-                $uname = "root";
-                $password = "";
-                $db_name = "test_db";
-                $connect = mysqli_connect($sname, $uname, $password, $db_name, 4306);
-                
                 $filename = $upload_directory . $file_name; // Path to the uploaded file
                 
                 // Read and decode JSON data, with improved error handling
@@ -34,26 +28,22 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                     echo "JSON Error: " . json_last_error_msg();
                 } else {
                     foreach($array as $row){
-                        $id = $row["id"];
                         $lat = $row["lat"];
                         $lon = $row["lon"];
                         $name = $row["name"];
                         $shop = $row["shop"];
 
                         // Perform SQL Delete
-                        $sql = "DELETE FROM shops WHERE id = '$id' AND lat = '$lat' AND lon = '$lon' AND name = '$name' AND shop='$shop'";
-                        mysqli_query($connect, $sql_delete_shops);
+                        $sql = "DELETE FROM shops WHERE  lat = '$lat' AND lon = '$lon' AND name = '$name' AND shop='$shop'";
+                        mysqli_query($conn, $sql);
                     
                         // Delete products
-                        $sql_delete_products = "DELETE FROM shops WHERE id = '$id' AND lat = '$lat' AND lon = '$lon' AND name = '$name' AND shop='$shop'";
-                        mysqli_query($connect, $sql_delete_products);
-                        mysqli_query($connect, $sql);
-                        if (mysqli_query($connect, $sql) && mysqli_query($connect, $sql_delete_products)) {
+                        $sql_delete_shops = "DELETE FROM shops WHERE  lat = '$lat' AND lon = '$lon' AND name = '$name' AND shop='$shop'";
+                        mysqli_query($conn, $sql_delete_shops);
+                        if (mysqli_query($conn, $sql) && mysqli_query($conn, $sql_delete_shops)) {
                             // Check if any rows were affected by the DELETE operation
-                            if (mysqli_affected_rows($connect) > 0) {
-                                echo "Delete successful.";
-                            } else {
-                                echo "No such value to delete: '$name , '$id'";
+                            if (mysqli_affected_rows($conn) > 0) {
+                                echo "No such value to delete: '$name ";
                             }
                         }
                     }
@@ -71,7 +61,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
     <html>
     <head>
         <title>Delete Shops</title>
-        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
         <div>
@@ -83,7 +73,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             </form>
         </div>
         <div>
-            <a href="../admin_home.php">Back to Home</a>
+            <a href="admin_home.php">Back to Home</a>
         </div>
     </body>
     </html>

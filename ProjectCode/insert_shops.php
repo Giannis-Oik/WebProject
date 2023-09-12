@@ -1,5 +1,7 @@
 <?php
 session_start();
+include 'db_conn.php';
+
 if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
 {
     if(isset($_POST['upload']))
@@ -11,18 +13,11 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             $file_tmp = $_FILES['file_to_upload']['tmp_name'];
             
             // Specify the directory where you want to store uploaded files
-            $upload_directory = "./"; // Use "./" to represent the current directory
+            $upload_directory = ""; // Use "./" to represent the current directory
             
             // Move the uploaded file to the desired directory
             if(move_uploaded_file($file_tmp, $upload_directory . $file_name))
             {
-                // Database connection
-                $sname = "localhost";
-                $uname = "root";
-                $password = "";
-                $db_name = "test_db";
-                $connect = mysqli_connect($sname, $uname, $password, $db_name, 4306);
-                
                 $filename = $upload_directory . $file_name; // Path to the uploaded file
                 
                 // Read and decode JSON data, with improved error handling
@@ -33,7 +28,6 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                     echo "JSON Error: " . json_last_error_msg();
                 } else {
                     foreach($array as $row){
-                        $id = $row["id"];
                         $lat = $row["lat"];
                         $lon = $row["lon"];
                         $name = $row["name"];
@@ -41,18 +35,17 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
 
 
                         // Check if the value already exists in the database
-                        $check_sql = "SELECT * FROM shops WHERE id='$id' AND name = '$name' AND lat = '$lat' AND lon = '$lon' AND shop='$shop' ";
-                        $result = mysqli_query($connect, $check_sql);
+                        $check_sql = "SELECT * FROM shops WHERE name = '$name' AND lat = '$lat' AND lon = '$lon' AND shop='$shop' ";
+                        $result = mysqli_query($conn, $check_sql);
 
                         if (mysqli_num_rows($result) > 0) {
-                            echo "Value '$name', '$id' already exists in the database.<br>";
+                            echo "Value '$name', '$lat', '$lon' already exists in the database.<br>";
                         } else {
                             // Perform SQL insertion
-                            $sql = "INSERT INTO shops(id,name,lat,lon,shop) VALUES ('$id','$name','$lat', '$lon', '$shop' )";
-                             mysqli_query($connect, $sql);
+                            $sql = "INSERT INTO shops(name,lat,lon,shop) VALUES ('$name','$lat', '$lon', '$shop' )";
+                             mysqli_query($conn, $sql);
                         }
                     }
-                    echo "Insert successful.";
                 }
             }
             else
@@ -67,7 +60,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
     <html>
     <head>
         <title>Insert Shops</title>
-        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
         <div>
@@ -79,7 +72,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             </form>
         </div>
         <div>
-            <a href="../admin_home.php">Back to Home</a>
+            <a href="admin_home.php">Back to Home</a>
         </div>
     </body>
     </html>

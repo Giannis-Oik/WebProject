@@ -1,9 +1,10 @@
 <?php
 session_start();
+include 'db_conn.php';
 
 if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
 {
-    if(isset($_POST['insert']))
+    if(isset($_POST['upload']))
     {
         // Check if a file has been selected for upload
         if(isset($_FILES['file_to_upload']))
@@ -12,20 +13,11 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             $file_tmp = $_FILES['file_to_upload']['tmp_name'];
             
             // Specify the directory where you want to store uploaded files
-            $upload_directory = "./"; // Use "./" to represent the current directory
+            $upload_directory = ""; // Use "./" to represent the current directory
             
             // Move the uploaded file to the desired directory
             if(move_uploaded_file($file_tmp, $upload_directory . $file_name))
             {
-                echo "Insert successful.";
-                
-                // Database connection
-                $sname = "localhost";
-                $uname = "root";
-                $password = "";
-                $db_name = "test_db";
-                $connect = mysqli_connect($sname, $uname, $password, $db_name, 4306);
-                
                 $filename = $upload_directory . $file_name; // Path to the uploaded file
                 
                 // Read and decode JSON data, with improved error handling
@@ -42,16 +34,15 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                         $subcategory = $row["subcategory"];
 
                         // Check if the value already exists in the database
-                        $check_sql = "SELECT * FROM categories WHERE name = '$name'OR id='$id' OR '$category' OR '$subcategory' ";
-                        $result = mysqli_query($connect, $check_sql);
+                        $check_sql = "SELECT * FROM products WHERE name = '$name' AND id = '$id' AND  category = '$category' AND subcategory = '$subcategory' ";
+                        $result = mysqli_query($conn, $check_sql);
 
                         if (mysqli_num_rows($result) > 0) {
                             echo "Value '$name', '$id', '$category' , '$subcategory' already exists in the database.<br>";
                         } else {
                             // Perform SQL insertion
                             $sql = "INSERT INTO products(id,name,category,subcategory) VALUES ('$id','$name','$category','$subcategory')";
-                            mysqli_query($connect, $sql);
-                             echo "Insert successful.";
+                            mysqli_query($conn, $sql);
                         }
                     }
                 }

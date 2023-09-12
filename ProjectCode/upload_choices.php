@@ -18,7 +18,6 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             <a href="insert_files.php">Insert files</a>
             <a href="delete_files.php">Delete files</a>
             <a href="update_files.php">Update files</a>
-            <a href="upload_files.php">Upload Files</a>
 
         </nav>
     </body>
