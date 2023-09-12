@@ -69,7 +69,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
     <html>
     <head>
         <title>Insert Subcategories</title>
-        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
         <div>
@@ -81,7 +81,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             </form>
         </div>
         <div>
-            <a href="../admin_home.php">Back to Home</a>
+            <a href="admin_home.php">Back to Home</a>
         </div>
     </body>
     </html>

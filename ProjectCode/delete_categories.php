@@ -35,10 +35,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                 } else {
                     foreach($array as $row){
                         $id = $row["id"];
-                        $lat = $row["lat"];
-                        $lon = $row["lon"];
                         $name = $row["name"];
-                        $shop = $row["shop"];
 
                         // Perform SQL Delete
                         $sql = "DELETE FROM categories WHERE id = '$id' AND name = '$name'";
@@ -72,7 +69,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
     <html>
     <head>
         <title>Delete Categories</title>
-        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
         <div>
@@ -84,7 +81,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             </form>
         </div>
         <div>
-            <a href="../admin_home.php">Back to Home</a>
+            <a href="admin_home.php">Back to Home</a>
         </div>
     </body>
     </html>

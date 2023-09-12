@@ -16,10 +16,11 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
         <h1>Hello, Admin <?php echo $_SESSION['user_name']; ?> </h1>
         
         <nav>
+            <a href="upload_choices.php">Upload choices</a>
             <a href="stats.php">Stats</a>
             <a href="logout.php">Logout</a>
             <a href="leaderboard.php">Leaderboard</a>
-
+            <a href="shop_files.php">Supermarket files</a>
         </nav>
     </body>
     </html>
