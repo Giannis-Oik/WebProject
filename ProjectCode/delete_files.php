@@ -8,7 +8,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
     <html>
     <head>
         <title>Delete Files</title>
-        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
     <h1>Delete values in each category</h1>
@@ -18,10 +18,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                 <a href="delete_products.php">Delete Products</a>
                 <a href="delete_categories.php">Delete Categories</a>
                 <a href="delete_subcategories.php">Delete Subcategories</a>
-                <a href="delete_shops.php">Delete Shops</a>
             </div>
             <div>
-            <a href="../admin_home.php">Back to Home</a>
+            <a href="admin_home.php">Back to Home</a>
         </div>
         </nav>
     </body>
