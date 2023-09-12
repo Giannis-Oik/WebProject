@@ -41,12 +41,11 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                         $shop = $row["shop"];
 
                         // Perform SQL Delete
-                        $sql = "DELETE FROM categories WHERE id = '$id' AND name = '$name'";
-                        $sql_delete_subcategories = "DELETE FROM subcategories WHERE category_id = '$id'";
-                        mysqli_query($connect, $sql_delete_subcategories);
+                        $sql = "DELETE FROM shops WHERE id = '$id' AND lat = '$lat' AND lon = '$lon' AND name = '$name' AND shop='$shop'";
+                        mysqli_query($connect, $sql_delete_shops);
                     
                         // Delete products
-                        $sql_delete_products = "DELETE FROM products WHERE category = '$id'";
+                        $sql_delete_products = "DELETE FROM shops WHERE id = '$id' AND lat = '$lat' AND lon = '$lon' AND name = '$name' AND shop='$shop'";
                         mysqli_query($connect, $sql_delete_products);
                         mysqli_query($connect, $sql);
                         if (mysqli_query($connect, $sql) && mysqli_query($connect, $sql_delete_products)) {
@@ -71,12 +70,12 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Delete Categories</title>
+        <title>Delete Shops</title>
         <link rel="stylesheet" type="text/css" href="../style.css">
     </head>
     <body>
         <div>
-            <h1>Delete Categories</h1>
+            <h1>Delete Shops</h1>
             <form method="post" enctype="multipart/form-data">
                 <label for="file_to_upload">Upload JSON file:</label>
                 <input type="file" name="file_to_upload" required>

@@ -18,6 +18,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                 <a href="upload_products.php">Upload Products</a>
                 <a href="upload_categories.php">Upload Categories</a>
                 <a href="upload_subcategories.php">Upload Subcategories</a>
+                <a href="upload_shops.php">Upload Shops</a>
+
             </div>
             <div>
             <a href="../admin_home.php">Back to Home</a>

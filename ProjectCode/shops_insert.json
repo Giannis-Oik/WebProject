@@ -1,0 +1,409 @@
+[
+{
+  "id": 354449389,
+  "lat": 38.2080319,
+  "lon": 21.7126540,
+  "name": "Lidl",
+  "shop": "supermarket"
+},
+{
+  "id": 360217468,
+  "lat": 38.2893100,
+  "lon": 21.7806567,
+  "name": "The Mart",
+  "shop": "supermarket"
+},
+{
+  "id": 360226900,
+  "lat": 38.2633511,
+  "lon": 21.7434265,
+  "name": "Lidl",
+  "shop": "supermarket"
+},
+{
+  "id": 364381224,
+  "lat": 38.2952086,
+  "lon": 21.7908028,
+  "name": "Σουπερμάρκετ Ανδρικόπουλος",
+  "shop": "supermarket"
+},
+{
+  "id": 364463568,
+  "lat": 38.2104365,
+  "lon": 21.7642075,
+  "name": "Σκλαβενίτης",
+  "shop": "supermarket"
+},
+{
+  "id": 598279836,
+  "lat": 38.2355300,
+  "lon": 21.7622778,
+  "name": "Papakos",
+  "shop": "convenience"
+},
+{
+  "id": 980515550,
+  "lat": 38.2312926,
+  "lon": 21.7400820,
+  "name": "Lidl",
+  "shop": "supermarket"
+},
+{
+  "id": 1643373636,
+  "lat": 38.3013087,
+  "lon": 21.7814957,
+  "name": "Σκλαβενίτης",
+  "shop": "supermarket"
+},
+{
+  "id": 1643818281,
+  "lat": 38.2596476,
+  "lon": 21.7489662,
+  "name": "Σκλαβενίτης",
+  "shop": "supermarket"
+},
+{
+  "id": 1657132006,
+  "lat": 38.2613806,
+  "lon": 21.7436127,
+  "name": "Ρουμελιώτης SUPER Market",
+  "shop": "supermarket"
+},
+{
+  "id": 1657132008,
+  "lat": 38.2585236,
+  "lon": 21.7415820,
+  "name": "Σκλαβενίτης",
+  "shop": "supermarket"
+},
+{
+  "id": 1763830009,
+  "lat": 38.2323892,
+  "lon": 21.7473265,
+  "name": "My market",
+  "shop": "supermarket"
+},
+{
+  "id": 1763830474,
+  "lat": 38.2322376,
+  "lon": 21.7257294,
+  "name": "ΑΒ Βασιλόπουλος",
+  "shop": "supermarket"
+},
+{
+  "id": 1770994538,
+  "lat": 38.2644973,
+  "lon": 21.7603629,
+  "name": "Markoulas",
+  "shop": "supermarket"
+},
+{
+  "id": 1815896581,
+  "lat": 38.3067563,
+  "lon": 21.8051332,
+  "name": "Lidl",
+  "shop": "supermarket"
+},
+{
+  "id": 1971240515,
+  "lat": 38.2399863,
+  "lon": 21.7363710,
+  "name": "Ανδρικόπουλος",
+  "shop": "supermarket"
+},
+{
+  "id": 1971247760,
+  "lat": 38.2364945,
+  "lon": 21.7373409,
+  "name": "Σκλαβενίτης",
+  "shop": "supermarket"
+},
+{
+  "id": 1971249846,
+  "lat": 38.2427052,
+  "lon": 21.7342362,
+  "name": "My Market",
+  "shop": "supermarket"
+},
+{
+  "id": 3144355008,
+  "lat": 38.2568618,
+  "lon": 21.7396708,
+  "name": "My market",
+  "shop": "supermarket"
+},
+{
+  "id": 3354481184,
+  "lat": 38.1951968,
+  "lon": 21.7323293,
+  "name": "Ανδρικόπουλος",
+  "shop": "supermarket"
+},
+{
+  "id": 4101518891,
+  "lat": 38.2565589,
+  "lon": 21.7418506,
+  "name": "ΑΒ ΒΑΣΙΛΟΠΟΥΛΟΣ",
+  "shop": "supermarket"
+},
+{
+  "id": 4356183595,
+  "lat": 38.2434859,
+  "lon": 21.7332850,
+  "name": "Σκλαβενίτης",
+  "shop": "supermarket"
+},
+{
+  "id": 4357425491,
+  "lat": 38.2512732,
+  "lon": 21.7423925,
+  "name":"Kaponis",
+  "shop": "supermarket"
+},
+{
+  "id": 4357589496,
+  "lat": 38.2427963,
+  "lon": 21.7302559,
+  "name": "Ανδρικόπουλος",
+  "shop": "supermarket"
+},
+{
+  "id": 4484528391,
+  "lat": 38.2795377,
+  "lon": 21.7667136,
+  "name": "Carna",
+  "shop": "convenience"
+},
+{
+  "id": 4752810729,
+  "lat": 38.3052409,
+  "lon": 21.7770011,
+  "name": "Mini Market",
+  "shop": "convenience"
+},
+{
+  "id": 4931300543,
+  "lat": 38.2425794,
+  "lon": 21.7296435,
+  "name": "Kronos",
+  "shop": "supermarket"
+},
+{
+  "id": 4953268497,
+  "lat": 38.2585639,
+  "lon": 21.7504681,
+  "name": "Φίλιππας",
+  "shop": "convenience"
+},
+{
+  "id": 5005384516,
+  "lat": 38.2498065,
+  "lon": 21.7363349,
+  "name": "No supermarket",
+  "shop": "supermarket"
+},
+{
+  "id": 5005409493,
+  "lat": 38.2490852,
+  "lon": 21.7351280,
+  "name": "Kiosk",
+  "shop": "convenience"
+},
+{
+  "id": 5005409494,
+  "lat": 38.2493169,
+  "lon": 21.7349115,
+  "name": "Kiosk",
+  "shop": "convenience"
+},
+{
+  "id": 5005409495,
+  "lat": 38.2489563,
+  "lon": 21.7344427,
+  "name": "Kiosk",
+  "shop": "convenience"
+},
+{
+  "id": 5005476710,
+  "lat": 38.2569875,
+  "lon": 21.7413066,
+  "name": "Kiosk",
+  "shop": "convenience"
+},
+{
+  "id": 5005476711,
+  "lat": 38.2561434,
+  "lon": 21.7409531,
+  "name": "Kiosk",
+  "shop": "convenience"
+},
+{
+  "id": 5164678230,
+  "lat": 38.2691937,
+  "lon": 21.7481501,
+  "name": "Ανδρικόπουλος - Supermarket",
+  "shop": "supermarket"
+},
+{
+  "id": 5164741179,
+  "lat": 38.2690963,
+  "lon": 21.7497014,
+  "name": "Σκλαβενίτης",
+  "shop": "supermarket"
+},
+{
+  "id": 5350727524,
+  "lat": 38.2338270,
+  "lon": 21.7251655,
+  "name": "ENA food cash $ cary",
+  "shop": "supermarket"
+},
+{
+  "id": 5396345464,
+  "lat": 38.3277388,
+  "lon": 21.8764222,
+  "name": "Mini Market",
+  "shop": "convenience"
+},
+{
+  "id": 5620198221,
+  "lat": 38.2170935,
+  "lon": 21.7357783,
+  "name": "ΑΒ Βασιλόπουλος",
+  "shop": "supermarket"
+},
+{
+  "id": 5620208927,
+  "lat": 38.2160259,
+  "lon": 21.7321204,
+  "name": "Mini Market",
+  "shop": "convenience"
+},
+{
+  "id": 7673935764,
+  "lat": 38.2504514,
+  "lon": 21.7396687,
+  "name": "3A",
+  "shop": "supermarket"
+},
+{
+  "id": 7673976786,
+  "lat": 38.2486316,
+  "lon": 21.7389771,
+  "name": "Spar",
+  "shop": "supermarket"
+},
+{
+  "id": 7673986831,
+  "lat": 38.2481545,
+  "lon": 21.7383224,
+  "name": "ΑΝΔΡΙΚΟΠΟΥΛΟΣ",
+  "shop": "supermarket"
+},
+{
+  "id": 7674120315,
+  "lat": 38.2429466,
+  "lon": 21.7308044,
+  "name": "ΑΝΔΡΙΚΟΠΟΥΛΟΣ",
+  "shop": "supermarket"
+},
+{
+  "id": 7677225097,
+  "lat": 38.2392836,
+  "lon": 21.7265283,
+  "name": "MyMarket",
+  "shop": "supermarket"
+},
+{
+  "id": 8214753473,
+  "lat": 38.2346622,
+  "lon": 21.7253472,
+  "name": "Ena Cash And Carry",
+  "shop": "supermarket"
+},
+{
+  "id": 8214854586,
+  "lat": 38.2358002,
+  "lon": 21.7294915,
+  "name": "ΚΡΟΝΟΣ - (Σκαγιοπουλείου)",
+  "shop": "supermarket"
+},
+{
+  "id": 8214887295,
+  "lat": 38.2379176,
+  "lon": 21.7306406,
+  "name": "Ανδρικόπουλος Super Market",
+  "shop": "supermarket"
+},
+{
+  "id": 8214887306,
+  "lat": 38.2375068,
+  "lon": 21.7328984,
+  "name": "3Α Αράπης",
+  "shop": "supermarket"
+},
+{
+  "id": 8214910532,
+  "lat": 38.2361127,
+  "lon": 21.7337870,
+  "name": "Γαλαξίας",
+  "shop": "supermarket"
+},
+{
+  "id": 8215010716,
+  "lat": 38.2360129,
+  "lon": 21.7283123,
+  "name": "Super Market Θεοδωρόπουλος",
+  "shop": "supermarket"
+},
+{
+  "id": 8215157448,
+  "lat": 38.2390442,
+  "lon": 21.7340723,
+  "name": "Super Market ΚΡΟΝΟΣ",
+  "shop": "supermarket"
+},
+{
+  "id": 8777081651,
+  "lat": 38.2601801,
+  "lon": 21.7428703,
+  "name": "Σκλαβενίτης",
+  "shop": "supermarket"
+},
+{
+  "id": 8777171555,
+  "lat": 38.2586424,
+  "lon": 21.7460078,
+  "name": "3A ARAPIS",
+  "shop": "supermarket"
+},
+{
+  "id": 8805335004,
+  "lat": 38.2454669,
+  "lon": 21.7355058,
+  "name": "Masoutis",
+  "shop": "supermarket"
+},
+{
+  "id": 8805467220,
+  "lat": 38.2495700,
+  "lon": 21.7380288,
+  "name": "ΑΒ Shop & Go",
+  "shop": "supermarket"
+},
+{
+  "id": 8806495733,
+  "lat": 38.2398789,
+  "lon": 21.7455558,
+  "name": "3Α ΑΡΑΠΗΣ",
+  "shop": "supermarket"
+},
+{
+  "id": 9651304117,
+  "lat": 38.2554443,
+  "lon": 21.7408745,
+  "name": "Περίπτερο",
+  "shop": "convenience"
+}
+]
+

@@ -1,68 +1,65 @@
 <?php
 session_start();
 
-if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
-{
-    if(isset($_POST['upload']))
-    {
+if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
+    if (isset($_POST['upload'])) {
         // Check if a file has been selected for upload
-        if(isset($_FILES['file_to_upload']))
-        {
+        if (isset($_FILES['file_to_upload'])) {
             $file_name = $_FILES['file_to_upload']['name'];
             $file_tmp = $_FILES['file_to_upload']['tmp_name'];
-            
+
             // Specify the directory where you want to store uploaded files
             $upload_directory = "./"; // Use "./" to represent the current directory
-            
+
             // Move the uploaded file to the desired directory
-            if(move_uploaded_file($file_tmp, $upload_directory . $file_name))
-            {
+            if (move_uploaded_file($file_tmp, $upload_directory . $file_name)) {
                 // Database connection
                 $sname = "localhost";
                 $uname = "root";
                 $password = "";
                 $db_name = "test_db";
                 $connect = mysqli_connect($sname, $uname, $password, $db_name, 4306);
-                
+
                 $filename = $upload_directory . $file_name; // Path to the uploaded file
-                
+
                 // Read and decode JSON data, with improved error handling
                 $data = file_get_contents($filename);
                 $array = json_decode($data, true);
-                
+
                 if ($array === null && json_last_error() !== JSON_ERROR_NONE) {
                     echo "JSON Error: " . json_last_error_msg();
                 } else {
-                    foreach($array as $row){
+                    $noChange = true; // Initialize a flag variable
+                    foreach ($array as $row) {
                         $id = $row["id"];
                         $lat = $row["lat"];
                         $lon = $row["lon"];
                         $name = $row["name"];
                         $shop = $row["shop"];
 
-                        // Perform SQL Delete
-                        $sql = "DELETE FROM categories WHERE id = '$id' AND name = '$name'";
-                        $sql_delete_subcategories = "DELETE FROM subcategories WHERE category_id = '$id'";
-                        mysqli_query($connect, $sql_delete_subcategories);
-                    
-                        // Delete products
-                        $sql_delete_products = "DELETE FROM products WHERE category = '$id'";
-                        mysqli_query($connect, $sql_delete_products);
-                        mysqli_query($connect, $sql);
-                        if (mysqli_query($connect, $sql) && mysqli_query($connect, $sql_delete_products)) {
-                            // Check if any rows were affected by the DELETE operation
-                            if (mysqli_affected_rows($connect) > 0) {
-                                echo "Delete successful.";
-                            } else {
-                                echo "No such value to delete: '$name , '$id'";
+                        // Check if the value with the given ID exists
+                        $check_sql = "SELECT * FROM shops WHERE id = '$id' AND lat = '$lat' AND lon = '$lon' AND name = '$name' AND shop='$shop' ";
+                        $result = mysqli_query($connect, $check_sql);
+
+                        if (mysqli_num_rows($result) > 0) {
+                            // The value exists, check if all fields are the same
+                            $existingRow = mysqli_fetch_assoc($result);
+
+                            if ($existingRow['name'] !== $name || $existingRow['id'] !== $id) {
+                                // At least one field is different, perform an update
+                                $update_sql = "UPDATE shops SET id = '$id' AND lat = '$lat' AND lon = '$lon' AND name = '$name' AND shop='$shop'";
+                                mysqli_query($connect, $update_sql);
+                                echo "'$id','$name','$lat', '$lon', '$shop' updated successfully.<br>";
                             }
-                        }
+                            else {
+                                // The value does not exist
+                                echo "No such value to update: '$id','$name','$lat', '$lon', '$shop'.<br>";
+                            }
+                        } 
                     }
                 }
-            }
-            else
-            {
-                echo "Error deleting file.";
+            } else {
+                echo "Error updating file.";
             }
         }
     }
@@ -71,12 +68,12 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Delete Categories</title>
+        <title>Update Shops</title>
         <link rel="stylesheet" type="text/css" href="../style.css">
     </head>
     <body>
         <div>
-            <h1>Delete Categories</h1>
+            <h1>Update Shops</h1>
             <form method="post" enctype="multipart/form-data">
                 <label for="file_to_upload">Upload JSON file:</label>
                 <input type="file" name="file_to_upload" required>
@@ -90,9 +87,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
     </html>
 
     <?php
-}
-else
-{
+} else {
     header("Location: index.php");
     exit();
 }
