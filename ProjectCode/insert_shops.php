@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
 {
     if(isset($_POST['upload']))
@@ -40,29 +39,25 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                         $name = $row["name"];
                         $shop = $row["shop"];
 
-                        // Perform SQL Delete
-                        $sql = "DELETE FROM categories WHERE id = '$id' AND name = '$name'";
-                        $sql_delete_subcategories = "DELETE FROM subcategories WHERE category_id = '$id'";
-                        mysqli_query($connect, $sql_delete_subcategories);
-                    
-                        // Delete products
-                        $sql_delete_products = "DELETE FROM products WHERE category = '$id'";
-                        mysqli_query($connect, $sql_delete_products);
-                        mysqli_query($connect, $sql);
-                        if (mysqli_query($connect, $sql) && mysqli_query($connect, $sql_delete_products)) {
-                            // Check if any rows were affected by the DELETE operation
-                            if (mysqli_affected_rows($connect) > 0) {
-                                echo "Delete successful.";
-                            } else {
-                                echo "No such value to delete: '$name , '$id'";
-                            }
+
+                        // Check if the value already exists in the database
+                        $check_sql = "SELECT * FROM shops WHERE id='$id' AND name = '$name' AND lat = '$lat' AND lon = '$lon' AND shop='$shop' ";
+                        $result = mysqli_query($connect, $check_sql);
+
+                        if (mysqli_num_rows($result) > 0) {
+                            echo "Value '$name', '$id' already exists in the database.<br>";
+                        } else {
+                            // Perform SQL insertion
+                            $sql = "INSERT INTO shops(id,name,lat,lon,shop) VALUES ('$id','$name','$lat', '$lon', '$shop' )";
+                             mysqli_query($connect, $sql);
                         }
                     }
+                    echo "Insert successful.";
                 }
             }
             else
             {
-                echo "Error deleting file.";
+                echo "Error inserting file.";
             }
         }
     }
@@ -71,12 +66,12 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Delete Categories</title>
+        <title>Insert Shops</title>
         <link rel="stylesheet" type="text/css" href="../style.css">
     </head>
     <body>
         <div>
-            <h1>Delete Categories</h1>
+            <h1>Insert Shops</h1>
             <form method="post" enctype="multipart/form-data">
                 <label for="file_to_upload">Upload JSON file:</label>
                 <input type="file" name="file_to_upload" required>
