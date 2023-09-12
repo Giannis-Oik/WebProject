@@ -18,6 +18,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                 <a href="delete_products.php">Delete Products</a>
                 <a href="delete_categories.php">Delete Categories</a>
                 <a href="delete_subcategories.php">Delete Subcategories</a>
+                <a href="delete_shops.php">Delete Shops</a>
             </div>
             <div>
             <a href="admin_home.php">Back to Home</a>

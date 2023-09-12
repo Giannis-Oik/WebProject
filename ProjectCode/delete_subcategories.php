@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'db_conn.php';
 
 if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
 {
@@ -12,18 +13,11 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             $file_tmp = $_FILES['file_to_upload']['tmp_name'];
             
             // Specify the directory where you want to store uploaded files
-            $upload_directory = "./"; // Use "./" to represent the current directory
+            $upload_directory = ""; // Use "./" to represent the current directory
             
             // Move the uploaded file to the desired directory
             if(move_uploaded_file($file_tmp, $upload_directory . $file_name))
             {
-                // Database connection
-                $sname = "localhost";
-                $uname = "root";
-                $password = "";
-                $db_name = "test_db";
-                $connect = mysqli_connect($sname, $uname, $password, $db_name, 4306);
-                
                 $filename = $upload_directory . $file_name; // Path to the uploaded file
                 
                 // Read and decode JSON data, with improved error handling
@@ -40,21 +34,15 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
 
                         // Perform SQL Delete
                         $sql = "DELETE FROM subcategories WHERE id = '$id' AND name = '$name' AND category_id = '$category_id'";
-                        $sql_delete_products = "DELETE FROM products WHERE category = '$category_id'";
-                        mysqli_query($connect, $sql_delete_products);
-                        mysqli_query($connect, $sql);
+                        $sql_delete_products = "DELETE FROM products WHERE subcategory = '$id'";
+                        mysqli_query($conn, $sql_delete_products);
+                        mysqli_query($conn, $sql);
 
-                        // Delete products
-                        $sql_delete_products = "DELETE FROM products WHERE category = '$category_id'";
-                        mysqli_query($connect, $sql_delete_products);
-                        mysqli_query($connect, $sql);
-                        if (mysqli_query($connect, $sql) && mysqli_query($connect, $sql_delete_products)) {
+                        if (mysqli_query($conn, $sql) && mysqli_query($conn, $sql_delete_products)) {
                             // Check if any rows were affected by the DELETE operation
-                            if (mysqli_affected_rows($connect) > 0) {
-                                echo "Delete successful.";
-                            } else {
+                            if (mysqli_affected_rows($conn) > 0) {
                                 echo "No such value to delete: '$name , '$id'";
-                            }
+                            } 
                         }
                     }
                 }

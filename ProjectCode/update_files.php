@@ -18,6 +18,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                 <a href="update_products.php">Update Products</a>
                 <a href="update_categories.php">Update Categories</a>
                 <a href="update_subcategories.php">Update Subcategories</a>
+                <a href="update_shops.php">Update Shops</a>
             </div>
             <div>
             <a href="admin_home.php">Back to Home</a>

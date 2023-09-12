@@ -17,6 +17,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                 <a href="insert_products.php">Insert Products</a>
                 <a href="insert_categories.php">Insert Categories</a>
                 <a href="insert_subcategories.php">Insert Subcategories</a>
+                <a href="insert_shops.php">Insert Shops</a>
             </div>
         </nav>
         <div>

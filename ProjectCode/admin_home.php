@@ -20,7 +20,6 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             <a href="stats.php">Stats</a>
             <a href="logout.php">Logout</a>
             <a href="leaderboard.php">Leaderboard</a>
-            <a href="shop_files.php">Supermarket files</a>
         </nav>
     </body>
     </html>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'db_conn.php';
 
 if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
     if (isset($_POST['upload'])) {
@@ -9,17 +10,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
             $file_tmp = $_FILES['file_to_upload']['tmp_name'];
 
             // Specify the directory where you want to store uploaded files
-            $upload_directory = "./"; // Use "./" to represent the current directory
+            $upload_directory = ""; // Use "./" to represent the current directory
 
             // Move the uploaded file to the desired directory
             if (move_uploaded_file($file_tmp, $upload_directory . $file_name)) {
-                // Database connection
-                $sname = "localhost";
-                $uname = "root";
-                $password = "";
-                $db_name = "test_db";
-                $connect = mysqli_connect($sname, $uname, $password, $db_name, 4306);
-
                 $filename = $upload_directory . $file_name; // Path to the uploaded file
 
                 // Read and decode JSON data, with improved error handling
@@ -36,8 +30,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                         $category_id = $row["id"];
 
                         // Check if the value with the given ID exists
-                        $check_sql = "SELECT * FROM subcategories WHERE id = '$id' AND category_id = '$category_id'";
-                        $result = mysqli_query($connect, $check_sql);
+                        $check_sql = "SELECT * FROM subcategories WHERE id = '$id' AND name = '$name' AND category_id = '$category_id'";
+                        $result = mysqli_query($conn, $check_sql);
 
                         if (mysqli_num_rows($result) > 0) {
                             // The value exists, check if all fields are the same
@@ -45,9 +39,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
 
                             if ($existingRow['name'] !== $name || $existingRow['id'] !== $id || $existingRow['category_id'] !== $category_id) {
                                 // At least one field is different, perform an update
-                                $update_sql = "UPDATE subcategories SET name = '$name'AND id = '$id' WHERE id = '$id' AND category_id = '$category_id'";
-                                mysqli_query($connect, $update_sql);
-                                echo "Record with ID '$id' updated successfully.<br>";
+                                $update_sql = "UPDATE subcategories SET name = '$name' AND id = '$id' AND category_id = '$category_id' WHERE name = '$name' AND id = '$id' AND  AND category_id = '$category_id' ";
+                                mysqli_query($conn, $update_sql);
                             }
                             else {
                                 // The value does not exist

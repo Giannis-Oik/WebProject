@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'db_conn.php';
 
 if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
     if (isset($_POST['upload'])) {
@@ -9,17 +10,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
             $file_tmp = $_FILES['file_to_upload']['tmp_name'];
 
             // Specify the directory where you want to store uploaded files
-            $upload_directory = "./"; // Use "./" to represent the current directory
+            $upload_directory = ""; // Use "./" to represent the current directory
 
             // Move the uploaded file to the desired directory
             if (move_uploaded_file($file_tmp, $upload_directory . $file_name)) {
-                // Database connection
-                $sname = "localhost";
-                $uname = "root";
-                $password = "";
-                $db_name = "test_db";
-                $connect = mysqli_connect($sname, $uname, $password, $db_name, 4306);
-
                 $filename = $upload_directory . $file_name; // Path to the uploaded file
 
                 // Read and decode JSON data, with improved error handling
@@ -31,29 +25,27 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                 } else {
                     $noChange = true; // Initialize a flag variable
                     foreach ($array as $row) {
-                        $id = $row["id"];
                         $lat = $row["lat"];
                         $lon = $row["lon"];
                         $name = $row["name"];
                         $shop = $row["shop"];
 
                         // Check if the value with the given ID exists
-                        $check_sql = "SELECT * FROM shops WHERE id = '$id' AND lat = '$lat' AND lon = '$lon' AND name = '$name' AND shop='$shop' ";
-                        $result = mysqli_query($connect, $check_sql);
+                        $check_sql = "SELECT * FROM shops WHERE lat = '$lat' AND lon = '$lon' AND name = '$name' AND shop='$shop' ";
+                        $result = mysqli_query($conn, $check_sql);
 
                         if (mysqli_num_rows($result) > 0) {
                             // The value exists, check if all fields are the same
                             $existingRow = mysqli_fetch_assoc($result);
 
-                            if ($existingRow['name'] !== $name || $existingRow['id'] !== $id) {
+                            if ($existingRow['name'] !== $name ) {
                                 // At least one field is different, perform an update
-                                $update_sql = "UPDATE shops SET id = '$id' AND lat = '$lat' AND lon = '$lon' AND name = '$name' AND shop='$shop'";
-                                mysqli_query($connect, $update_sql);
-                                echo "'$id','$name','$lat', '$lon', '$shop' updated successfully.<br>";
+                                $update_sql = "UPDATE shops SET  lat = '$lat' AND lon = '$lon' AND name = '$name' AND shop='$shop'";
+                                mysqli_query($conn, $update_sql);
                             }
                             else {
                                 // The value does not exist
-                                echo "No such value to update: '$id','$name','$lat', '$lon', '$shop'.<br>";
+                                echo "No such value to update: '$name','$lat', '$lon', '$shop'.<br>";
                             }
                         } 
                     }
@@ -69,7 +61,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
     <html>
     <head>
         <title>Update Shops</title>
-        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
         <div>
@@ -81,7 +73,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
             </form>
         </div>
         <div>
-            <a href="../admin_home.php">Back to Home</a>
+            <a href="admin_home.php">Back to Home</a>
         </div>
     </body>
     </html>
