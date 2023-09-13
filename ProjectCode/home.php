@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "tokens.php";
+include_once "update_active_sales.php";
 
 if(isset($_SESSION['id']) && isset($_SESSION['user_name'])) //Arxikh selida xrhstwn, perilamvanei to menu gia perigihsh stis ypoloipes selides
 {
