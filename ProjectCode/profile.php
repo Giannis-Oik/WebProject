@@ -10,9 +10,10 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name'])) //Selida epexergasia
     $sqlemail = "SELECT * FROM users WHERE user_name='$uname' AND email='$email'";
     $result = mysqli_query($conn,$sqlemail);
     $row = mysqli_fetch_assoc($result);
-    $sqlsales = "SELECT * FROM sales WHERE user_id='$id'";
+    
+    $sqlsales = "SELECT products.name, sales.price, sales.date, sales.likes, sales.dislikes FROM sales INNER JOIN products ON sales.product_id = products.id WHERE sales.user_id = '$id'";
     $sales_result = mysqli_query($conn,$sqlsales);
-    $sales_row = mysqli_fetch_assoc($sales_result);
+
     ?>
 
     <!DOCTYPE html>
@@ -31,7 +32,17 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name'])) //Selida epexergasia
             <li>Tokens: <?php echo $row['tokens']; ?></li>
             <li>All time score: <?php echo $row['score']; ?></li>
             <li>Monthly score: <?php echo $row['monthly_score']; ?></li>
-            <li>Submitted sales history: <?php echo $sales_row['date']?></li>
+            <li>Likes total: <?php echo $row['likes']; ?></li>
+            <li>Total dislikes: <?php echo $row['dislikes']; ?></li>
+            <li>Submitted sales history: <?php while($sales_row = mysqli_fetch_array($sales_result)) {
+                $price = $sales_row['price'];
+                $date = $sales_row['date'];
+                $name = $sales_row['name'];
+                $likes = $sales_row['likes'];
+                $dislikes = $sales_row['dislikes'];
+
+                echo '<p>'.'Product: '.$name.'<br>'.'Price: '.$price.'<br>'.'Date submitted: '.$date.'<br>'.'Likes: '.$likes.'<br>'.'Dislikes: '.$dislikes.'</p>';
+            }?></li>
         </ul>
         <nav> <!-- Menu pou dinei sto xrhsth thn epilogh na allaxei username, password h email -->
             <a href="change-username.php">Change username</a>

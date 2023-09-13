@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Εξυπηρετητής: 127.0.0.1
--- Χρόνος δημιουργίας: 12 Σεπ 2023 στις 18:21:22
+-- Χρόνος δημιουργίας: 14 Σεπ 2023 στις 01:55:06
 -- Έκδοση διακομιστή: 10.4.28-MariaDB
 -- Έκδοση PHP: 8.2.4
 
@@ -34,16 +34,19 @@ CREATE TABLE `admins` (
   `email` varchar(100) NOT NULL,
   `tokens` int(11) NOT NULL,
   `score` int(11) NOT NULL,
-  `monthly_score` int(11) NOT NULL
+  `monthly_score` int(11) NOT NULL,
+  `monthly_tokens` int(11) NOT NULL DEFAULT 0,
+  `likes` int(11) NOT NULL DEFAULT 0,
+  `dislikes` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Άδειασμα δεδομένων του πίνακα `admins`
 --
 
-INSERT INTO `admins` (`id`, `user_name`, `password`, `email`, `tokens`, `score`, `monthly_score`) VALUES
-(1, 'Giannis', 'Giannis1!', 'giannis@gmail.com', 0, 0, 0),
-(2, 'Nikos', 'Nikos1!', 'nikos@gmail.com', 0, 0, 0);
+INSERT INTO `admins` (`id`, `user_name`, `password`, `email`, `tokens`, `score`, `monthly_score`, `monthly_tokens`, `likes`, `dislikes`) VALUES
+(1, 'Giannis', 'Giannis1!', 'giannis@gmail.com', 0, 0, 0, 0, 2, 0),
+(2, 'Nikos', 'Nikos1!', 'nikos@gmail.com', 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -141,10 +144,22 @@ CREATE TABLE `sales` (
   `price` double NOT NULL,
   `date` date NOT NULL,
   `active` tinyint(1) NOT NULL,
+  `likes` int(11) NOT NULL DEFAULT 0,
+  `dislikes` int(11) NOT NULL DEFAULT 0,
+  `stock` tinyint(4) NOT NULL DEFAULT 1,
   `shop_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `sales`
+--
+
+INSERT INTO `sales` (`id`, `price`, `date`, `active`, `likes`, `dislikes`, `stock`, `shop_id`, `user_id`, `product_id`) VALUES
+(1, 5.99, '2023-09-10', 1, 5, 2, 1, 54, 2, 1322),
+(2, 2.99, '2023-09-11', 1, 9, 5, 1, 2, 2, 978),
+(3, 1.99, '2023-09-01', 0, 0, 0, 1, 54, 1, 1337);
 
 -- --------------------------------------------------------
 
@@ -260,17 +275,19 @@ CREATE TABLE `users` (
   `tokens` int(11) NOT NULL,
   `monthly_tokens` int(11) NOT NULL,
   `score` int(11) NOT NULL,
-  `monthly_score` int(11) NOT NULL
+  `monthly_score` int(11) NOT NULL,
+  `likes` int(11) NOT NULL DEFAULT 0,
+  `dislikes` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Άδειασμα δεδομένων του πίνακα `users`
 --
 
-INSERT INTO `users` (`id`, `user_name`, `password`, `email`, `tokens`, `monthly_tokens`, `score`, `monthly_score`) VALUES
-(1, 'User1', 'User12345!', 'user@gmail.com', 5000, 0, 2000, 0),
-(2, 'User2', 'User12345!', 'user2@gmail.com', 4000, 0, 1500, 0),
-(3, 'user3', 'User123456!', 'user3@gmail.com', 3000, 0, 1200, 0);
+INSERT INTO `users` (`id`, `user_name`, `password`, `email`, `tokens`, `monthly_tokens`, `score`, `monthly_score`, `likes`, `dislikes`) VALUES
+(1, 'User1', 'User12345!', 'user@gmail.com', 5000, 0, 2000, 0, 3, 2),
+(2, 'User2', 'User12345!', 'user2@gmail.com', 4000, 0, 1563, 0, 0, 0),
+(3, 'user3', 'User123456!', 'user3@gmail.com', 3000, 0, 1200, 0, 0, 0);
 
 --
 -- Ευρετήρια για άχρηστους πίνακες
@@ -344,7 +361,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT για πίνακα `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT για πίνακα `shops`
