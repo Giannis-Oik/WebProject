@@ -2,6 +2,8 @@
 session_start();
 include "db_conn.php";
 
+$currentuser = $_SESSION['id'];
+
 ?>
 <!DOCTYPE html>
     <html>
@@ -153,6 +155,9 @@ if(isset($_POST['like'])) //An egine submit like
     $sql = "UPDATE users SET score = score + 5 WHERE id='$user'"; //Ayxhse score xrhsth
     mysqli_query($conn,$sql);
 
+    $sql = "UPDATE admins SET likes = likes + 1 WHERE id ='$currentuser'"; //Update arithmou likes gia ton xrhsth 
+    mysqli_query($conn,$sql);
+
 }else if(isset($_POST['dislike'])) //An egine submit dislike
 {
     $id = $_POST['id'];
@@ -167,6 +172,9 @@ if(isset($_POST['like'])) //An egine submit like
     $user = $row['user_id'];
 
     $sql = "UPDATE users SET score = score - 1 WHERE id='$user'"; //Meiwse score xrhsth
+    mysqli_query($conn,$sql);
+
+    $sql = "UPDATE admins SET dislikes = dislikes + 1 WHERE id ='$currentuser'"; //Update arithmou dislikes gia ton xrhsth 
     mysqli_query($conn,$sql);
 
 }else if(isset($_POST['on_stock'])) //An egine submit to koympi poy dhlwnei oti yparxei apothema
