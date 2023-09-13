@@ -148,7 +148,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))//Selida opoy emfaniz
 
         function checkSale()
         {
-            window.open("sales.php");
+            window.open("sales_admin.php");
         }
 
         function handColorIcon(color){ //Sinartisi gia thn allagh toy xrwmatos toy marker
