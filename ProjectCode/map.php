@@ -66,7 +66,7 @@ if(mysqli_num_rows($result) > 0)
     }
 }
 
-$sql = "SELECT * FROM sales"; //Dhmiourgia json pinaka me tis prosfores
+$sql = "SELECT products.name, sales.shop_id, sales.active, sales.stock, sales.likes, sales.dislikes, sales.price, sales.date  FROM sales INNER JOIN products ON sales.product_id = products.id"; //Dhmiourgia json pinaka me tis prosfores
 $result = mysqli_query($conn,$sql);
 
 while($row = mysqli_fetch_array($result)) //Dhmniourgia geojson pinaka me ta katasthmata apo th vash.
@@ -113,6 +113,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))//Selida opoy emfaniz
         const sales = <?php echo json_encode($sales); ?>;
         
         var marker,lat,long;
+        var mark = new Array();
 
         var map = L.map('map').locate({setView: true, maxZoom: 17}).on('locationfound', function(e){ //Arxikopoihsh xarth sto location toy xrhsth alliws an den mporei na to vrei tote emfanizei mhnyma lathoys
             var lat = e.latitude;
@@ -176,19 +177,21 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))//Selida opoy emfaniz
 
         function checkSale()
         {
-            window.open("sales_admin.php");
+            window.open("sales.php");
         }
 
         function shopswithin() //Sinartisi poy vriskei ta magazia entos 150 metrwn
         {
-            var mark;
             for(var i = 0; i < shops.length; i++)
             {
                 distance = getDistanceFromLatLonInKm(shops[i].lat, shops[i].lon, lat, lng);
                 if(distance <= 150)
                 {
-                    mark = L.marker([shops[i].lat, shops[i].lon]);
-                    mark.addTo(map).bindPopup('<h2>'+ shops[i].name + " " + shops[i].id +'</h2>'+'<p id="demo"></p>'+'<button onclick="addSale();">New sale</button>' + '<button onclick="checkSale();">Rate sales</button>').setIcon(handColorIcon("green"));
+                    mark[i] = L.marker([shops[i].lat, shops[i].lon]);
+                    mark[i].addTo(map).bindPopup('<h2>'+ shops[i].name + " " + shops[i].id +'</h2>'+'<p id="demo"></p>'+'<button onclick="addSale();">New sale</button>' + '<button onclick="checkSale();">Rate sales</button>').setIcon(handColorIcon("green"));
+                }else if(distance > 150 && mark[i] != undefined) //An ginei klik se allo shmeio sto xarth tote afairese endexomena markers poy apexoyn panw apo 150 metra kai eixan hdh emfanistei
+                {
+                    map.removeLayer(mark[i]);
                 }
             }
         }
@@ -222,11 +225,11 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))//Selida opoy emfaniz
                 {
                     if(sales[i].stock == 1)
                     {
-                        values.push("Price: "+ sales[i].price +" Date submitted: "+sales[i].date+" Likes: "+ sales[i].likes+" Dislikes: "+sales[i].dislikes+" Stock: Yes" );
+                        values.push("Product: "+ sales[i].name +" Price: "+ sales[i].price +" Date submitted: "+sales[i].date+" Likes: "+ sales[i].likes+" Dislikes: "+sales[i].dislikes+" Stock: Yes" );
                     }
                     else
                     {
-                        values.push("Price: "+ sales[i].price +" Date submitted: "+sales[i].date+" Likes: "+ sales[i].likes+" Dislikes: "+sales[i].dislikes+" Stock: No" );
+                        values.push("Product: "+ sales[i].name +" Price: "+ sales[i].price +" Date submitted: "+sales[i].date+" Likes: "+ sales[i].likes+" Dislikes: "+sales[i].dislikes+" Stock: No" );
                     }
                 }
             }
