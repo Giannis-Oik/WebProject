@@ -20,6 +20,7 @@ while($row = mysqli_fetch_array($result))
     <head>
         <title>New sale submission</title>
         <link rel="stylesheet" type="text/css" href="style.css">
+        
     </head>
     <body>
     <form method="post"> <!-- Forma h opoia emfanizei dropdown menu gia epilogh proiontos -->
@@ -65,7 +66,7 @@ while($row = mysqli_fetch_array($result))
 
     <h4>Sale submission form</h4> <!--Forma gia katathesi prosforas -->
     <form action="" method="post">
-        <p><?php echo "Your chosen product id is: ".$row['id']; ?></p> <p id="demo"></p>
+        <p><?php echo "Your chosen product id is: ".$row['id']; ?></p>
         <div>
             <label for="shop">Insert the shop id from the map:</label>
             <input type="text" name="shop_id">
@@ -138,7 +139,7 @@ while($row = mysqli_fetch_array($result))
             $earned = 0;
             if($price <= $week_perc) //An h timh xamhlwterh apo 20% ths evdomadiaias
             {
-                $sql = "UPDATE users SET score = score + 20, monthly_score = monthly_score + 20 WHERE id='$currentuser'";
+                $sql = "UPDATE admins SET score = score + 20, monthly_score = monthly_score + 20 WHERE id='$currentuser'";
                 mysqli_query($conn,$sql);
                 $sql = "UPDATE sales SET below_week_price = 1 WHERE price='$price', product_id='$product', shop_id='$shop'";
                 mysqli_query($conn,$sql);
@@ -147,7 +148,7 @@ while($row = mysqli_fetch_array($result))
 
             if($price <= $day_perc) //An h timh xamhlwterh apo 20% ths prohgoymenhs hmeras
             {
-                $sql = "UPDATE users SET score = score + 50, monthly_score = monthly_score + 50 WHERE id='$currentuser'";
+                $sql = "UPDATE admins SET score = score + 50, monthly_score = monthly_score + 50 WHERE id='$currentuser'";
                 mysqli_query($conn,$sql);
                 $sql = "UPDATE sales SET below_day_price = 1 WHERE price='$price', product_id='$product', shop_id='$shop'";
                 mysqli_query($conn,$sql);
@@ -165,10 +166,10 @@ while($row = mysqli_fetch_array($result))
     ?>
     </body>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
         $('table').hide(); //Script to opoio analoga me thn anazhthsh toy xrhsth sto search bar emfanizei osa proionta moiazoun me to input
-        $('#searchbar').on("keyup", function(){
+        $('#searchbar').on("keyup", function(){ 
             var searchVal = $('#searchbar').val();
             if(searchVal =="")
             {
