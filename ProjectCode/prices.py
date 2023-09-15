@@ -246,25 +246,26 @@ products = [
     }
 ]
 # Orise to date range
-start_date = datetime(2023, 1, 1)
-end_date = datetime(2023, 9, 21)
-date_range = [start_date + timedelta(days=i) for i in range((end_date - start_date).days + 1)]
-num_dates_to_generate = 5 #dld na dinei 5 dates gia kathe proion
+start_date = datetime(2023, 9, 24)
+end_date = datetime(2023, 9,30)
+date_range = [start_date + timedelta(days=i) for i in [0,1,2,3,4,5,6]]
+num_dates_to_generate = 7 #dld na dinei 5 dates gia kathe proion
 selected_dates = random.sample(date_range, num_dates_to_generate)
 # Generate JSON data with prices
 all_prices = []
+auto_increment_id = 1
 
 for product in products:
     for date in selected_dates:
-        price = round(random.uniform(0.25, 4.5), 2)  #dwse random price pou kumainontai apo 1 - 4.5 euros
+        price = round(random.uniform(0.50, 4.5), 2)
         all_prices.append({
-            "id": product["id"],
-            "name": product["name"],
-            "category": product["category"],
+            "id": auto_increment_id,
+            "product_id": product["id"],
             "date": date.strftime("%Y-%m-%d"),
             "price": price
         })
+        auto_increment_id += 1  # Increment the auto-increment id
 
-# Convert the result to JSON 
+# Convert the result to JSON
 json_prices = json.dumps(all_prices, indent=4, ensure_ascii=False)
 print(json_prices)

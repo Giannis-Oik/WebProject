@@ -215,7 +215,7 @@ if(isset($_GET['input']))
                     echo $image1337;
                     break;
                 default:
-                    echo "No available image for this product"
+                    echo "No available image for this product";
                     break;
             }
 
@@ -262,7 +262,7 @@ if(isset($_POST['like'])) //An egine submit like
 
     $user = $row['user_id'];
 
-    $sql = "UPDATE users SET score = score + 5 WHERE id='$user'"; //Ayxhse score xrhsth
+    $sql = "UPDATE users SET score = score + 5, monthly_score = monthly_score + 5 WHERE id='$user'"; //Ayxhse score xrhsth
     mysqli_query($conn,$sql);
 
     $sql = "UPDATE admins SET likes = likes + 1 WHERE id ='$currentuser'"; //Update arithmou likes gia ton xrhsth 
@@ -281,7 +281,7 @@ if(isset($_POST['like'])) //An egine submit like
 
     $user = $row['user_id'];
 
-    $sql = "UPDATE users SET score = score - 1 WHERE id='$user'"; //Meiwse score xrhsth
+    $sql = "UPDATE users SET score = score - 1, monthly_score = monthly_score - 1 WHERE id='$user'"; //Meiwse score xrhsth
     mysqli_query($conn,$sql);
 
     $sql = "UPDATE admins SET dislikes = dislikes + 1 WHERE id ='$currentuser'"; //Update arithmou dislikes gia ton xrhsth 

@@ -170,7 +170,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))//Selida opoy emfaniz
 
         function addSale() //Sinartiseis gia ta koympia poy vriskontai entos twn popup
         {
-            window.open("new_sales.php");
+            window.open("new_sales_admin.php");
         }
 
         function checkSale()
@@ -221,13 +221,37 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))//Selida opoy emfaniz
             {
                 if(sales[i].shop_id == id && sales[i].active == 1)
                 {
-                    if(sales[i].stock == 1)
+                    if(sales[i].stock == 1 && sales[i].below_day_price == 1 && sales[i].below_week_price == 1)
                     {
-                        values.push("Product: "+ sales[i].name +" Price: "+ sales[i].price +" Date submitted: "+sales[i].date+" Likes: "+ sales[i].likes+" Dislikes: "+sales[i].dislikes+" Stock: Yes" );
+                        values.push("Product: "+ sales[i].name +" Price: "+ sales[i].price +" Date submitted: "+sales[i].date+" Likes: "+ sales[i].likes+" Dislikes: "+sales[i].dislikes+" Stock: Yes Below daily price: Yes, Below weekly price: Yes" );
+                    }
+                    else if(sales[i].stock == 1 && sales[i].below_day_price == 0 && sales[i].below_week_price == 1)
+                    {
+                        values.push("Product: "+ sales[i].name +" Price: "+ sales[i].price +" Date submitted: "+sales[i].date+" Likes: "+ sales[i].likes+" Dislikes: "+sales[i].dislikes+" Stock: Yes Below daily price: No, Below weekly price: Yes" );
+                    }
+                    else if(sales[i].stock == 1 && sales[i].below_day_price == 1 && sales[i].below_week_price == 0)
+                    {
+                        values.push("Product: "+ sales[i].name +" Price: "+ sales[i].price +" Date submitted: "+sales[i].date+" Likes: "+ sales[i].likes+" Dislikes: "+sales[i].dislikes+" Stock: Yes Below daily price: Yes, Below weekly price: No" );
+                    }
+                    else if(sales[i].stock == 1 && sales[i].below_day_price == 0 && sales[i].below_week_price == 0)
+                    {
+                        values.push("Product: "+ sales[i].name +" Price: "+ sales[i].price +" Date submitted: "+sales[i].date+" Likes: "+ sales[i].likes+" Dislikes: "+sales[i].dislikes+" Stock: Yes Below daily price: No, Below weekly price: No" );
+                    }
+                    else if(sales[i].stock == 0 && sales[i].below_day_price == 1 && sales[i].below_week_price == 1)
+                    {
+                        values.push("Product: "+ sales[i].name +" Price: "+ sales[i].price +" Date submitted: "+sales[i].date+" Likes: "+ sales[i].likes+" Dislikes: "+sales[i].dislikes+" Stock: No Below daily price: Yes, Below weekly price: Yes" );
+                    }
+                    else if(sales[i].stock == 0 && sales[i].below_day_price == 0 && sales[i].below_week_price == 1)
+                    {
+                        values.push("Product: "+ sales[i].name +" Price: "+ sales[i].price +" Date submitted: "+sales[i].date+" Likes: "+ sales[i].likes+" Dislikes: "+sales[i].dislikes+" Stock: No Below daily price: No, Below weekly price: Yes" );
+                    }
+                    else if(sales[i].stock == 0 && sales[i].below_day_price == 1 && sales[i].below_week_price == 0)
+                    {
+                        values.push("Product: "+ sales[i].name +" Price: "+ sales[i].price +" Date submitted: "+sales[i].date+" Likes: "+ sales[i].likes+" Dislikes: "+sales[i].dislikes+" Stock: No Below daily price: Yes, Below weekly price: No" );
                     }
                     else
                     {
-                        values.push("Product: "+ sales[i].name +" Price: "+ sales[i].price +" Date submitted: "+sales[i].date+" Likes: "+ sales[i].likes+" Dislikes: "+sales[i].dislikes+" Stock: No" );
+                        values.push("Product: "+ sales[i].name +" Price: "+ sales[i].price +" Date submitted: "+sales[i].date+" Likes: "+ sales[i].likes+" Dislikes: "+sales[i].dislikes+" Stock: No Below daily price: No, Below weekly price: No" );
                     }
                 }
             }
