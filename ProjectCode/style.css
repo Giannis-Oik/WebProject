@@ -1,6 +1,6 @@
 body {
 
-    background: #a8a8a8;
+    background: #bdbdbd;
 
     display: flex;
 
@@ -16,7 +16,7 @@ body {
 
 *{
 
-    font-family: cursive;
+    font-family: 'Courier New', Courier, monospace;
 
     box-sizing: padding-box;
 
@@ -26,13 +26,13 @@ form {
 
     width: 1000px;
 
-    border: 3px solid rgb(177, 142, 142);
+    border: 3px solid rgb(27, 27, 27);
 
-    padding: 20px;
+    padding: 10px;
 
-    background: rgb(85, 54, 54);
+    background: rgb(54, 64, 85);
 
-    border-radius: 20px;
+    border-radius: 15px;
 
 }
 
@@ -40,7 +40,7 @@ h2 {
 
     text-align: center;
 
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 
 }
 
@@ -48,21 +48,21 @@ input {
 
     display: block;
 
-    border: 2px solid #ccc;
+    border: 2px solid #1d1d1d;
 
-    width: 95%;
+    width: 97%;
 
     padding: 10px;
 
-    margin: 10px auto;
+    margin: 7px auto;
 
-    border-radius: 5px;
+    border-radius: 15px;
 
 }
 
 label {
 
-    color: #888;
+    color: #dadada;
 
     font-size: 18px;
 
@@ -74,23 +74,22 @@ button {
 
     float: right;
 
-    background: rgb(35, 174, 202);
+    background: rgb(27, 27, 27);
 
     padding: 10px 15px;
 
     color: #fff;
 
-    border-radius: 5px;
+    border-radius: 15px;
 
     margin-right: 10px;
 
     border: none;
-
 }
 
 button:hover{
 
-    opacity: .10;
+    opacity: .20;
 
 }
 
@@ -114,7 +113,7 @@ h1 {
 
     text-align: center;
 
-    color: rgb(134, 3, 3);
+    color: rgb(11, 44, 116);
 
 }
 
@@ -122,13 +121,13 @@ a {
 
     float: right;
 
-    background: rgb(183, 225, 233);
+    background: rgb(27, 27, 27);
 
     padding: 10px 15px;
 
     color: #fff;
 
-    border-radius: 10px;
+    border-radius: 15px;
 
     margin-right: 10px;
 
@@ -140,6 +139,10 @@ a {
 
 a:hover{
 
-    opacity: .7;
+    opacity: .20;
 
+}
+
+nav {
+    display: inline;
 }

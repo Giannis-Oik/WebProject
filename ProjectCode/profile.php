@@ -21,6 +21,15 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name'])) //Selida epexergasia
     <head>
         <title>Profile</title>
         <link rel="stylesheet" type="text/css" href="style.css">
+        <style>
+            ul li{
+                display: inline;
+            }
+
+            nav {
+                display: flex;
+            }
+        </style>
     </head>
     <body>
         <h1>Hello, <?php echo $_SESSION['user_name']; ?> this is your profile page. </h1>

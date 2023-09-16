@@ -26,7 +26,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             <input type="text" name="newemail" placeholder="New Email"><br>
 
             <button class="button" type="submit">Confirm change</button>
-                <a href="home.php">HOME</a>
+            <button class="button" type="button" onclick="location.href='home.php';">Home</button>
         </form>
     </body>
     </html>
