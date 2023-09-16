@@ -74,9 +74,6 @@ while($row = mysqli_fetch_array($result)) //Dhmniourgia geojson pinaka me ta kat
     $sales[] = $row;
 }
 
-
-
-
 if(isset($_SESSION['id']) && isset($_SESSION['user_name']))//Selida opoy emfanizetai o xarths 
 {
     ?>
@@ -111,6 +108,10 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))//Selida opoy emfaniz
         const array = <?php echo json_encode($salesjson, JSON_NUMERIC_CHECK); ?>;
         const shops = <?php echo json_encode($shops_array); ?>;
         const sales = <?php echo json_encode($sales); ?>;
+        const trofima = <?php echo json_encode($trofimajson, JSON_NUMERIC_CHECK); ?>;
+        const pota = <?php echo json_encode($drinksjson, JSON_NUMERIC_CHECK); ?>;
+        const personal = <?php echo json_encode($personaljson, JSON_NUMERIC_CHECK); ?>;
+        const pets = <?php echo json_encode($petsjson, JSON_NUMERIC_CHECK); ?>;
         
         var marker,lat,long;
         var mark = new Array();
