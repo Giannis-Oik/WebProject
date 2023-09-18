@@ -19,6 +19,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name'])) //Selida poy emfaniz
         </style>
     </head>
     <body>
+        <h2>Select a year and a month to show the number of sales for each day of the month</h2>
         <form method="post"> <!-- Forma h opoia emfanizei dropdown menus gia xronies kai mhnes mesw ths opoias epilegei o admin poioy mhna ta statistika na emfanisei -->
             <div>
                 <label for="year">Year:</label>

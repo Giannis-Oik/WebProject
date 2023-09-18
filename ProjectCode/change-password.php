@@ -12,6 +12,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
+        <h1>Please insert the old and new password in order to change it</h1>
         <form action="change-p.php" method="post">
 
             <?php if(isset($_GET['error'])) { ?>

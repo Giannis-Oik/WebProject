@@ -272,6 +272,21 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))//Selida opoy emfaniz
             });
         }
 
+        var homeButton = L.control({ position: 'topleft' }); //Koumpi gia epistrofh sthn arxikh selida apo to xarth
+
+        homeButton.onAdd = function () {
+            var button = L.DomUtil.create('button', 'home-button');
+            button.innerHTML = 'Home';
+
+            button.addEventListener('click', function () {
+                    location.href = "admin_home.php";
+            });
+
+            return button;
+        };
+
+        homeButton.addTo(map);
+
     </script>
     <?php
 }

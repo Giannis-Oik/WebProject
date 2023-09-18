@@ -35,6 +35,8 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
         </style>
     </head>
     <body>
+        <h4>Select at least a category and a week from the options below to show the stats for the percentage sales price for the items of selected category for that week</h4>
+        <p>If you dont select a subcategory then the stats will be from all items in that category</p>
         <form method="post"> <!-- Forma h opoia emfanizei dropdown menus gia kathgories, ypokathgories kai evdomadwn mesw ths opoias epilegei o admin poia statistika na emfanisei -->
             <div>
                 <label for="category">Category:</label>

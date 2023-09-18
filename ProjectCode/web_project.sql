@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Εξυπηρετητής: 127.0.0.1
--- Χρόνος δημιουργίας: 15 Σεπ 2023 στις 16:22:39
+-- Χρόνος δημιουργίας: 18 Σεπ 2023 στις 23:19:01
 -- Έκδοση διακομιστή: 10.4.28-MariaDB
 -- Έκδοση PHP: 8.2.4
 
@@ -45,7 +45,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `user_name`, `password`, `email`, `tokens`, `score`, `monthly_score`, `monthly_tokens`, `likes`, `dislikes`) VALUES
-(1, 'Giannis', 'Giannis1!', 'giannis@gmail.com', 0, 0, 0, 0, 2, 0),
+(1, 'Giannis', 'Giannis1!', 'giannis@gmail.com', 0, 40, 40, 0, 2, 0),
 (2, 'Nikos', 'Nikos1!', 'nikos@gmail.com', 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -464,23 +464,26 @@ CREATE TABLE `sales` (
   `below_week_price` tinyint(1) NOT NULL DEFAULT 0,
   `below_day_price` tinyint(1) NOT NULL DEFAULT 0,
   `shop_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `product_id` int(11) NOT NULL,
+  `admin_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Άδειασμα δεδομένων του πίνακα `sales`
 --
 
-INSERT INTO `sales` (`id`, `price`, `date`, `active`, `likes`, `dislikes`, `stock`, `below_week_price`, `below_day_price`, `shop_id`, `user_id`, `product_id`) VALUES
-(1, 5.99, '2023-09-10', 1, 5, 2, 1, 0, 0, 54, 2, 1322),
-(2, 2.99, '2023-09-11', 1, 9, 5, 1, 0, 0, 2, 2, 978),
-(3, 1.99, '2023-09-01', 0, 0, 0, 1, 0, 0, 54, 1, 1337),
-(7, 4.99, '2023-09-14', 1, 0, 0, 1, 0, 0, 49, 1, 1152),
-(8, 2, '2023-09-14', 1, 0, 0, 1, 0, 0, 7, 1, 930),
-(9, 4.99, '2023-09-14', 1, 0, 0, 0, 0, 0, 46, 1, 1022),
-(10, 4.99, '2023-09-14', 1, 0, 0, 1, 0, 0, 26, 1, 1143),
-(11, 4.99, '2023-09-14', 1, 0, 0, 1, 0, 0, 27, 1, 699);
+INSERT INTO `sales` (`id`, `price`, `date`, `active`, `likes`, `dislikes`, `stock`, `below_week_price`, `below_day_price`, `shop_id`, `user_id`, `product_id`, `admin_id`) VALUES
+(1, 5.99, '2023-09-10', 0, 11, 8, 1, 0, 0, 54, 2, 1322, NULL),
+(2, 2.99, '2023-09-11', 1, 9, 5, 1, 0, 0, 2, 2, 978, NULL),
+(3, 1.99, '2023-09-01', 0, 0, 0, 1, 0, 0, 54, 1, 1337, NULL),
+(7, 4.99, '2023-09-14', 1, 0, 0, 1, 0, 0, 49, 1, 1152, NULL),
+(8, 2, '2023-09-14', 1, 0, 0, 1, 0, 0, 7, 1, 930, NULL),
+(9, 4.99, '2023-09-14', 1, 0, 0, 0, 0, 0, 46, 1, 1022, NULL),
+(10, 4.99, '2023-09-14', 1, 0, 0, 1, 0, 0, 26, 1, 1143, NULL),
+(11, 4.99, '2023-09-14', 1, 0, 0, 1, 0, 0, 27, 1, 699, NULL),
+(13, 2.99, '2023-09-15', 1, 0, 0, 1, 0, 0, 37, 3, 1143, NULL),
+(15, 0.99, '2023-09-18', 1, 0, 0, 1, 1, 0, 33, NULL, 379, 1);
 
 -- --------------------------------------------------------
 
@@ -576,6 +579,9 @@ CREATE TABLE `subcategories` (
 --
 
 INSERT INTO `subcategories` (`id`, `name`, `category_id`) VALUES
+('0c6e42d52765495dbbd06c189a4fc80f', 'Pet shop/Τροφή σκύλου', '662418cbd02e435280148dbb8892782a'),
+('26e416b6efa745218f810c34678734b2', 'Στοματική υγιεινή', '8e8117f7d9d64cf1a931a351eb15bd69'),
+('2bce84e7df694ab1b81486aa2baf555d', 'Σερβιέτες', '8e8117f7d9d64cf1a931a351eb15bd69'),
 ('3010aca5cbdc401e8dfe1d39320a8d1a', 'Αναψυκτικά - Ενεργειακά Ποτά', 'a8ac6be68b53443bbd93b229e2f9cd34'),
 ('4f1993ca5bd244329abf1d59746315b8', 'Χυμοί', 'a8ac6be68b53443bbd93b229e2f9cd34'),
 ('926262c303fe402a8542a5d5cf3ac7eb', 'Pet shop/Τροφή γάτας', '662418cbd02e435280148dbb8892782a'),
@@ -606,8 +612,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_name`, `password`, `email`, `tokens`, `monthly_tokens`, `score`, `monthly_score`, `likes`, `dislikes`) VALUES
-(1, 'User1', 'User12345!', 'user@gmail.com', 5000, 0, 2000, 0, 3, 2),
-(2, 'User2', 'User12345!', 'user2@gmail.com', 4000, 0, 1563, 0, 0, 0),
+(1, 'User1', 'User12345!', 'user@gmail.com', 5000, 0, 2000, 0, 9, 8),
+(2, 'User2', 'User12345!', 'user2@gmail.com', 4000, 0, 1587, 24, 0, 0),
 (3, 'user3', 'User123456!', 'user3@gmail.com', 3000, 0, 1200, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -871,9 +877,10 @@ ALTER TABLE `products`
 --
 ALTER TABLE `sales`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `userkey` (`user_id`),
   ADD KEY `productkey` (`product_id`),
-  ADD KEY `shopkey` (`shop_id`);
+  ADD KEY `shopkey` (`shop_id`),
+  ADD KEY `userkey` (`user_id`),
+  ADD KEY `adminkey` (`admin_id`);
 
 --
 -- Ευρετήρια για πίνακα `shops`
@@ -921,7 +928,7 @@ ALTER TABLE `daily_prices`
 -- AUTO_INCREMENT για πίνακα `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT για πίνακα `shops`
@@ -962,9 +969,10 @@ ALTER TABLE `products`
 -- Περιορισμοί για πίνακα `sales`
 --
 ALTER TABLE `sales`
+  ADD CONSTRAINT `adminkey` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `productkey` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `shopkey` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `userkey` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `userkey` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Περιορισμοί για πίνακα `subcategories`
