@@ -43,9 +43,10 @@ $currentuser = $_SESSION['id'];
                 background-repeat: no-repeat;
                 background-size: contain;
                 margin: 5px 10px 5px 10px;
-                width: 32px;
-                height: 32px;
+                width: 35px;
+                height: 35px;
                 border: none;
+                border-radius: 10px;
             }
             
             input[name=dislike]
@@ -54,9 +55,10 @@ $currentuser = $_SESSION['id'];
                 background-repeat: no-repeat;
                 background-size: contain;
                 margin: 5px 10px 5px 10px;
-                width: 32px;
-                height: 32px;
+                width: 35px;
+                height: 35px;
                 border: none;
+                border-radius: 10px;
             }
             
             input[name=on_stock]
@@ -65,9 +67,10 @@ $currentuser = $_SESSION['id'];
                 background-repeat: no-repeat;
                 background-size: contain;
                 margin: 5px 10px 5px 10px;
-                width: 32px;
-                height: 32px;
+                width: 35px;
+                height: 35px;
                 border: none;
+                border-radius: 10px;
             }
             
             input[name=out_of_stock]
@@ -76,16 +79,17 @@ $currentuser = $_SESSION['id'];
                 background-repeat: no-repeat;
                 background-size: contain;
                 margin: 5px 10px 5px 10px;
-                width: 32px;
-                height: 32px;
+                width: 35px;
+                height: 35px;
                 border: none;
+                border-radius: 10px;
             }
 
             .form-inline {
                 display: flex;
                 flex-flow: row wrap;
                 align-items: center;
-                width: 15%;
+                width: 12%;
             }
         </style>
     </head>
@@ -217,7 +221,7 @@ if(isset($_GET['input']))
 
             }
         
-            echo '<form class="form-inline" action="" method="post">'; //Dhmiourgia formas gia ta like,dislike kai ta koympia gia to apothema
+            echo '<form class="form-inline" action="sales.php?input='.$input.'" method="post">'; //Dhmiourgia formas gia ta like,dislike kai ta koympia gia to apothema
             echo '<input type="hidden" name="id" value='.$sales_id.'>';
             if($stock > 0) //An yparxei apothema
             {

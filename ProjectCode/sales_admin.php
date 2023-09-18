@@ -229,7 +229,7 @@ if(isset($_GET['input']))
 
             }
         
-            echo '<form class="form-inline" action="" method="post">'; //Dhmiourgia formas gia ta like,dislike kai ta koympia gia to apothema
+            echo '<form class="form-inline" action="sales.php?input='.$input.'" method="post">'; //Dhmiourgia formas gia ta like,dislike kai ta koympia gia to apothema
             echo '<input type="hidden" name="id" value='.$sales_id.'>';
             if($stock > 0) //An yparxei apothema
             {

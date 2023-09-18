@@ -20,8 +20,45 @@ while($row = mysqli_fetch_array($result))
     <head>
         <title>New sale submission</title>
         <link rel="stylesheet" type="text/css" href="style.css">
+        <style>
+            #pid{
+                color: #FFF;
+            }
+
+            input[name=stock]{
+                margin: auto;
+            }
+
+            input[name=search]{
+                position: sticky;
+                top: 50px;
+                width: 50%;
+            }
+
+            #tab{
+                width: 50%;
+                height: 100;
+                align: left;
+            }
+        </style>
     </head>
     <body>
+
+    <h4>Search for a product and show its product id</h4>
+    <input id="searchbar" type="text" name="search" placeholder="Search products..."> <!-- Mpara anazhthshs kai pinakas me ola ta proionta pros anazhthsh -->
+    
+    <div style="overflow-x:auto;" id="tab">
+    <table id="prod">
+        <?php
+            for($i = 0; $i < count($products); $i++)
+            {
+                echo '<tr> <td> Product name: '.$products[$i].' id: '.$prod_id[$i].'</td> </tr>';
+            }
+        ?>
+    </table>
+    </div>
+
+    <h4>Select a product from the dropdown menu and submit the form to show its product id below</h4>
     <form method="post"> <!-- Forma h opoia emfanizei dropdown menu gia epilogh proiontos -->
         <div>
             <label for="products">Products:</label>
@@ -40,17 +77,6 @@ while($row = mysqli_fetch_array($result))
         </div>
     </form>
 
-    <input id="searchbar" type="text" name="search" placeholder="Search products..."> <!-- Mpara anazhthshs kai pinakas me ola ta proionta pros anazhthsh -->
-    
-    <table id="prod">
-        <?php
-            for($i = 0; $i < count($products); $i++)
-            {
-                echo '<tr> <td> Product name: '.$products[$i].' id: '.$prod_id[$i].'</td> </tr>';
-            }
-        ?>
-    </table>
-
     <?php
         $product = filter_input(INPUT_POST, 'products', FILTER_SANITIZE_STRING); //Emfanish tou id toy epilegmenoy proiontos apo thn prohgoymenh forma. An h forma kenh tote epistrefei id = 0;
 
@@ -63,9 +89,9 @@ while($row = mysqli_fetch_array($result))
         }else {$row['id'] = 0;}
     ?>
 
-    <h4>Sale submission form</h4> <!--Forma gia katathesi prosforas -->
+    <h4>Sale submission form. Here you can submit the sale for a product providing the appropriate product id and shop id</h4> <!--Forma gia katathesi prosforas -->
     <form action="" method="post">
-        <p><?php echo "Your chosen product id is: ".$row['id']; ?></p> <p id="demo"></p>
+        <p id="pid"><?php echo "Your chosen product id is: ".$row['id']; ?></p>
         <div>
             <label for="shop">Insert the shop id from the map:</label>
             <input type="text" name="shop_id">
@@ -76,14 +102,17 @@ while($row = mysqli_fetch_array($result))
             <label for="price">Price of sale:</label>
             <input type="text" name="price">
 
-            <input type="radio" name="stock" value="in">In stock
-            <input type="radio" name="stock" value="out">Out of stock
+            <label for="stock">In stock:</label>
+            <input type="radio" name="stock" value="in">
+
+            <label for="stock">Out of stock:</label>
+            <input type="radio" name="stock" value="out">
         </div>
         <div>
             <button type="submit">Submit sale</button>
         </div>
     </form>
-
+    
     <?php
         $price = filter_input(INPUT_POST, 'price', FILTER_SANITIZE_STRING); 
         $stock = filter_input(INPUT_POST, 'stock', FILTER_SANITIZE_STRING); 
@@ -140,7 +169,7 @@ while($row = mysqli_fetch_array($result))
             {
                 $sql = "UPDATE users SET score = score + 20, monthly_score = monthly_score + 20 WHERE id='$currentuser'";
                 mysqli_query($conn,$sql);
-                $sql = "UPDATE sales SET below_week_price = 1 WHERE price='$price', product_id='$product', shop_id='$shop'";
+                $sql = "UPDATE sales SET below_week_price = 1 WHERE price='$price' AND product_id='$product' AND shop_id='$shop'";
                 mysqli_query($conn,$sql);
                 $earned += 20;
             }
@@ -149,7 +178,7 @@ while($row = mysqli_fetch_array($result))
             {
                 $sql = "UPDATE users SET score = score + 50, monthly_score = monthly_score + 50 WHERE id='$currentuser'";
                 mysqli_query($conn,$sql);
-                $sql = "UPDATE sales SET below_day_price = 1 WHERE price='$price', product_id='$product', shop_id='$shop'";
+                $sql = "UPDATE sales SET below_day_price = 1 WHERE price='$price' AND product_id='$product' AND shop_id='$shop'";
                 mysqli_query($conn,$sql);
                 $earned += 50;
             }

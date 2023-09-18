@@ -25,10 +25,6 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name'])) //Selida epexergasia
             ul li{
                 display: inline;
             }
-
-            nav {
-                display: flex;
-            }
         </style>
     </head>
     <body>
@@ -54,10 +50,10 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name'])) //Selida epexergasia
             }?></li>
         </ul>
         <nav> <!-- Menu pou dinei sto xrhsth thn epilogh na allaxei username, password h email -->
+            <a href="home.php">Home</a>
             <a href="change-username.php">Change username</a>
             <a href="change-email.php">Change email</a>
             <a href="change-password.php">Change password</a>
-            <a href="home.php">Home</a>
         </nav>
     </body>
     </html>

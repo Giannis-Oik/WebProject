@@ -11,18 +11,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-    <h1>Update values in each category</h1>
+    <h1>Choose what files you want to update in the database</h1>
         <nav>
-            <!-- Update Buttons -->
-            <div class="update-buttons">
-                <a href="update_products.php">Update Products</a>
-                <a href="update_categories.php">Update Categories</a>
-                <a href="update_subcategories.php">Update Subcategories</a>
-                <a href="update_shops.php">Update Shops</a>
-            </div>
-            <div>
-            <a href="admin_home.php">Back to Home</a>
-        </div>
+            <a href="admin_home.php">Home</a>
+            <a href="update_products.php">Update Products</a>
+            <a href="update_categories.php">Update Categories</a>
+            <a href="update_subcategories.php">Update Subcategories</a>
+            <a href="update_shops.php">Update Shops</a>
         </nav>
     </body>
     </html>

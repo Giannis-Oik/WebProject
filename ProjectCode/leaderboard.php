@@ -27,16 +27,16 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             .list {
                 text-align: center;
                 width: 50%;
-                border: 1px solid black;
             }
 
             .list .item {
                 border: 1px solid black;
-                padding: 10px; 
+                padding: 15px; 
+                border-radius: 15px;
             }
 
             .list .item:hover {
-                background: rgba(0, 0, 0, 0.05);
+                background: rgba(0, 0, 0, 0.1);
             }
 
             .pagenumbers {
@@ -55,7 +55,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                 outline: none;
                 cursor: pointer;
 
-                background-color: #ff0019;
+                background-color: #1a53c9;
 
                 margin: 5px;
                 transition: 0.4s;
@@ -64,15 +64,20 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                 font-size: 15px;
                 text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
                 box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+
+                border-radius: 15px;
             }
 
             .pagenumbers button.active {
-                background-color: #00ff40;
+                background-color: #1b1b1b;
                 box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
             }
         </style>
     </head>
     <body>
+        <nav>
+            <a href="admin_home.php">Home</a>
+        </nav>
         <h1>All-time user score leaderboard</h1>
         <div class="list" id="list"></div>
         <div class="pagenumbers" id="pagination"></div>
