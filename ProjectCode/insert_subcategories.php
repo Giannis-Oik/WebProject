@@ -6,21 +6,21 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
 {
     if(isset($_POST['upload']))
     {
-        // Check if a file has been selected for upload
+        // Check an exei epilexthei arxeio gia na ginei upload
         if(isset($_FILES['file_to_upload']))
         {
             $file_name = $_FILES['file_to_upload']['name'];
             $file_tmp = $_FILES['file_to_upload']['tmp_name'];
             
-            // Specify the directory where you want to store uploaded files
-            $upload_directory = ""; // Use "./" to represent the current directory
+            // Orizei/specify to directory gia na ginei store to arxeio pou tha ginei upload
+            $upload_directory = ""; 
             
-            // Move the uploaded file to the desired directory
+            //To arxeio tha ginei move se afto to directory
             if(move_uploaded_file($file_tmp, $upload_directory . $file_name))
             {
-                $filename = $upload_directory . $file_name; // Path to the uploaded file
+                $filename = $upload_directory . $file_name; // Path sto uploaded file
                 
-                // Read and decode JSON data, with improved error handling
+                // Diavazei kai kanei decode apo to arxeio JSON ta dedomena
                 $data = file_get_contents($filename);
                 $array = json_decode($data, true);
                 
@@ -30,16 +30,16 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                     foreach($array as $row){
                         $id = $row["uuid"];
                         $name = $row["name"];
-                        $category_id = $row["id"]; // Assuming id maps to category_id
+                        $category_id = $row["id"]; 
 
-                         // Check if the value already exists in the database
+                         // Check an iparxei i ipokathgoria
                          $check_sql = "SELECT * FROM subcategories WHERE id = '$id' AND  name = '$name' AND category_id = '$category_id'";
                          $result = mysqli_query($conn, $check_sql);
  
                          if (mysqli_num_rows($result) > 0) {
                              echo "Value '$name', '$id','$category_id' already exists in the database.<br>";
                          } else {
-                              // Perform SQL insertion
+                              // SQL insert
                               $sql = "INSERT INTO subcategories(id, name, category_id) VALUES ('$id', '$name', '$category_id')";
                               mysqli_query($conn, $sql);
                          }

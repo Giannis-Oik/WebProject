@@ -2,6 +2,7 @@
 session_start();
 include "db_conn.php";
 
+//Kane select to onoma ths kathgorias kai ipokathgorias gia na emfanizetai meta oste na kaneis select gia poia apo afta na ilopoieitai
 $sql="SELECT name FROM categories";
 $result = mysqli_query($conn,$sql);
 while($row=mysqli_fetch_array($result))
@@ -35,8 +36,8 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
         </style>
     </head>
     <body>
-        <h4>Select at least a category and a week from the options below to show the stats for the percentage sales price for the items of selected category for that week</h4>
-        <p>If you dont select a subcategory then the stats will be from all items in that category</p>
+        <h4>Kane select mia kathgoria kai tin evdomada gia na sou deiksei ta statistika gia aftin tin evdomada</h4>
+        <p>An den epilekseis ipokathgoria tha emfanisei apo thn kathgoria mono</p>
         <form method="post"> <!-- Forma h opoia emfanizei dropdown menus gia kathgories, ypokathgories kai evdomadwn mesw ths opoias epilegei o admin poia statistika na emfanisei -->
             <div>
                 <label for="category">Category:</label>
@@ -86,10 +87,11 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             $subcategory = filter_input(INPUT_POST, 'subcategory', FILTER_SANITIZE_STRING);
             $week = filter_input(INPUT_POST, 'week', FILTER_SANITIZE_STRING);
 
-            if($category && $week)
+            if($category && $week) //An exeis epileksei kathgoria kai evdomada gia na sou emfanisei ta stats
             {
-                if($week == 1)
+                if($week == 1) //Afto tha to kanei gia kathe apo tis 4 vdomades tou mhna
                 {
+                    //Esto oti exeis epileksei Ipokathgoria
                     $sql = "SELECT category_id FROM subcategories WHERE name='$subcategory'";
                     $result = mysqli_query($conn,$sql);
 
@@ -100,7 +102,8 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                             $id = $row['category_id'];
                         }
                     }else{ $id = 0;}
-                    
+
+                    //Esto oti exeis epileksei kathgoria
                     $sql = "SELECT * FROM categories WHERE id= '$id'";
                     $result = mysqli_query($conn,$sql);
 
@@ -113,7 +116,8 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                     }else { $name = "";}
 
                     if($name == $category)
-                    {   
+                    {
+                        //An exeis epileksei kathgoria mono pare ola ta proionta apo oles ths ipokathgories ths kathgorias kai ipologise gia aftes   
                         $sql = "SELECT * FROM subcategories WHERE name='$subcategory'";
                         $result = mysqli_query($conn,$sql);
                         
@@ -140,6 +144,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                         $percent = array();
                         for($i = 0; $i < count($prod_id); $i++)
                         {
+                            //Ipologise apo to athroisma twn timwn apo ta sales thn mesi ekptosi
                             $prod = $prod_id[$i];
                             $sum = 0;
                             $count = 0;
@@ -163,6 +168,9 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                                     }
                                 }
                             }
+                            //Kai tora ipologise apo tis evdomadiaies times ton proionton sto diasthma ths kathe evdomadas to pososto
+                            //% apo tis sinolikes times sigkritika me tis times ton prosforon kai dwse to apotelesma %
+                            //Ektos an den iparxei kamia prosfora
 
                             $sql = "SELECT price FROM weekly_prices WHERE product_id='$prod' AND date BETWEEN '2023/09/01' AND '2023/09/07'";
                             $result = mysqli_query($conn, $sql);
@@ -1045,7 +1053,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                     }
                 }
             }
-            else
+            else //Den exeis epileksei kati apo afta
             {
                 echo "Please select a category and a week to show";
             }
