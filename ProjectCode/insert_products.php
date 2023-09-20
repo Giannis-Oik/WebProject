@@ -1,26 +1,25 @@
-<?php
-session_start();
+<?php // Arxeio pou eisageis ta proionta
 include 'db_conn.php';
 
 if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
 {
     if(isset($_POST['upload']))
     {
-        // Check if a file has been selected for upload
+        // Check an exei epilexthei arxeio gia na ginei upload
         if(isset($_FILES['file_to_upload']))
         {
             $file_name = $_FILES['file_to_upload']['name'];
             $file_tmp = $_FILES['file_to_upload']['tmp_name'];
             
-            // Specify the directory where you want to store uploaded files
-            $upload_directory = ""; // Use "./" to represent the current directory
+            // Orizei/specify to directory gia na ginei store to arxeio pou tha ginei upload
+            $upload_directory = ""; 
             
-            // Move the uploaded file to the desired directory
+            //To arxeio tha ginei move se afto to directory
             if(move_uploaded_file($file_tmp, $upload_directory . $file_name))
             {
-                $filename = $upload_directory . $file_name; // Path to the uploaded file
+                $filename = $upload_directory . $file_name; // Path sto uploaded file
                 
-                // Read and decode JSON data, with improved error handling
+                // Diavazei kai kanei decode apo to arxeio JSON ta dedomena
                 $data = file_get_contents($filename);
                 $array = json_decode($data, true);
                 
@@ -33,14 +32,14 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                         $category = $row["category"];
                         $subcategory = $row["subcategory"];
 
-                        // Check if the value already exists in the database
+                        //Check an iparxei afto to proion
                         $check_sql = "SELECT * FROM products WHERE name = '$name' AND id = '$id' AND  category = '$category' AND subcategory = '$subcategory' ";
                         $result = mysqli_query($conn, $check_sql);
 
                         if (mysqli_num_rows($result) > 0) {
                             echo "Value '$name', '$id', '$category' , '$subcategory' already exists in the database.<br>";
                         } else {
-                            // Perform SQL insertion
+                            // SQL insert
                             $sql = "INSERT INTO products(id,name,category,subcategory) VALUES ('$id','$name','$category','$subcategory')";
                             mysqli_query($conn, $sql);
                         }

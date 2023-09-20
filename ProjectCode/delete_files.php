@@ -1,4 +1,4 @@
-<?php
+<?php //Selida pou epilegeis ti theleis na diagrapseis
 session_start();
 
 if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
@@ -11,13 +11,20 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-    <h1>Choose what files you want to delete from the database</h1>
+    <h1>Delete values in each category</h1>
         <nav>
-            <a href="admin_home.php">Home</a>
-            <a href="delete_products.php">Delete Products</a>
-            <a href="delete_categories.php">Delete Categories</a>
-            <a href="delete_subcategories.php">Delete Subcategories</a>
-            <a href="delete_shops.php">Delete Shops</a>
+            <!-- Delete Buttons -->
+            <div class="delete-buttons">
+                <a href="delete_products.php">Delete Products</a>
+                <a href="delete_categories.php">Delete Categories</a>
+                <a href="delete_subcategories.php">Delete Subcategories</a>
+                <a href="delete_shops.php">Delete Shops</a>
+                <a href="delete_prices.php">Delete Prices</a>
+
+            </div>
+            <div>
+            <a href="admin_home.php">Back to Home</a>
+        </div>
         </nav>
     </body>
     </html>

@@ -3,47 +3,47 @@ session_start();
 
 if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
     if (isset($_POST['upload'])) {
-        // Check if a file has been selected for upload
-        if (isset($_FILES['file_to_upload'])) {
+        // Check an exei epilexthei arxeio gia na ginei upload
+        if(isset($_FILES['file_to_upload']))
+        {
             $file_name = $_FILES['file_to_upload']['name'];
             $file_tmp = $_FILES['file_to_upload']['tmp_name'];
-
-            // Specify the directory where you want to store uploaded files
-            $upload_directory = ""; // Use "./" to represent the current directory
-
-            // Move the uploaded file to the desired directory
+            
+            // Orizei/specify to directory gia na ginei store to arxeio pou tha ginei upload
+            $upload_directory = ""; 
+            
+            //To arxeio tha ginei move se afto to directory
             if (move_uploaded_file($file_tmp, $upload_directory . $file_name)) {
-                $filename = $upload_directory . $file_name; // Path to the uploaded file
-
-                // Read and decode JSON data, with improved error handling
+            
+                $filename = $upload_directory . $file_name; // Path sto uploaded file
+                
+                // Diavazei kai kanei decode apo to arxeio JSON ta dedomena
                 $data = file_get_contents($filename);
                 $array = json_decode($data, true);
 
                 if ($array === null && json_last_error() !== JSON_ERROR_NONE) {
                     echo "JSON Error: " . json_last_error_msg();
                 } else {
-                    $noChange = true; // Initialize a flag variable
                     foreach ($array as $row) {
                         $id = $row["id"];
                         $name = $row["name"];
                         $category = $row["category"];
                         $subcategory = $row["subcategory"];
 
-                        // Check if the value with the given ID exists
+                        // Check an iparxei i timi hdh
                         $check_sql = "SELECT * FROM products WHERE id = '$id' AND name = '$name' AND category = '$category' AND subcategory = '$subcategory'";
                         $result = mysqli_query($conn, $check_sql);
 
                         if (mysqli_num_rows($result) > 0) {
-                            // The value exists, check if all fields are the same
                             $existingRow = mysqli_fetch_assoc($result);
 
                             if ($existingRow['name'] !== $name || $existingRow['id'] !== $id || $existingRow['category'] !== $category) {
-                                // At least one field is different, perform an update
+                                // An ena apo afta einai diaforetiko, tote kane update
                                 $update_sql = "UPDATE products SET name = '$name' WHERE id = '$id' AND name = '$name' AND category = '$category'  AND subcategory = '$subcategory' ";
                                 mysqli_query($conn, $update_sql);
                             }
                             else {
-                                // The value does not exist
+                                // An den iparxei to proion
                                 echo "No such value to update: '$name','$id', '$category', '$subcategory'.<br>";
                             }
                         } 
