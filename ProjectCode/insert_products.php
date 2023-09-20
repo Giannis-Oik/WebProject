@@ -1,4 +1,5 @@
 <?php // Arxeio pou eisageis ta proionta
+session_start();
 include 'db_conn.php';
 
 if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
